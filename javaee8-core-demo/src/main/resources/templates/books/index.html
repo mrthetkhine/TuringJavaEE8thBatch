@@ -1,0 +1,27 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org" 
+>
+<body>
+	<section th:replace="fragments/header :: header"/>
+	<section layout:fragment="content">
+	
+	<a href="/books/new" class="btn btn-primary">New</a>
+	<table class="table table-striped">
+		<thead>
+			<th>Author</th>
+			<th>Title</th>
+			<th>Year</th>
+		</thead>
+		<tbody>
+			<tr th:each="book:${books}">
+				<td th:text="${book.author}"></td>
+				<td th:text="${book.title}"></td>
+				<td th:text="${book.year}"></td>
+			</tr> 
+		</tbody>
+	</table>
+	</section>
+	<section th:replace="fragments/footer :: footer"/>
+</body>
+</html>

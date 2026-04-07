@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org" 
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
+  <head>
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css} " />
+  </head>
+<body>
+	<button type="button" class="btn btn-primary">Hello</button>
+	<p th:utext="#{welcome}">Welcome to our system</p>
+	<p th:text="${message}">Welcome to thyleaf!</p>
+	<div th:object="${book}">
+	    <p>Title: <span th:text="*{title}">Sebastian</span>.</p>
+	    <p>Author: <span th:text="*{author}">Pepper</span>.</p>
+	    <p>Year: <span th:text="*{year}">Saturn</span>.</p>
+	</div>
+	<p th:text="'Text literal'">Welcome to thyleaf!</p>
+	<p th:text="2+3">Welcome to thyleaf!</p>
+	<p th:text="'concat with string '+ ${message}">Welcome to thyleaf!</p>
+	<span th:text="|Welcome to our application, ${message}!|">
+	</span>
+		
+	<div th:text="${admin}"></div>	
+	<div th:text="'Admin User'" th:if="${admin}"></div>
+	<div th:text="'Not Admin User'" th:if="${not admin}"></div>
+	
+	<div th:switch="${gender}">
+	  <p th:case="'m'">Male</p>
+	  <p th:case="*">Female</p>
+	</div>
+</body>
+</html>
