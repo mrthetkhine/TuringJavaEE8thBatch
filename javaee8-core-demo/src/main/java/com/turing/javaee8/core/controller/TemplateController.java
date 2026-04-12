@@ -20,7 +20,7 @@ public class TemplateController {
 		log.info("Demo index");
 		model.addAttribute("message", "Hi from controller");
 		
-		Book book = new Book("Fast and slow thinking","Dianel ",2010);
+		Book book = new Book(1L,"Fast and slow thinking","Dianel ",2010);
 		
 		model.addAttribute("book", book);
 		model.addAttribute("admin", false);

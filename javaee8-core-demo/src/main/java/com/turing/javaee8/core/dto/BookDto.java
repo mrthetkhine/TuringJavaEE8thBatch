@@ -1,4 +1,4 @@
-package com.turing.javaee8.core.model;
+package com.turing.javaee8.core.dto;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
-public class Book {
+public class BookDto {
 	Long id;
 	//@NotNull
 	//@Size(min=5, message="Author must be at least 5 characters long")
@@ -19,7 +19,7 @@ public class Book {
 	
 	int year;
 	
-	public Book(Long id, String author, String title, int year) {
+	public BookDto(Long id, String author, String title, int year) {
 		super();
 		this.id = id;
 		this.author = author;
