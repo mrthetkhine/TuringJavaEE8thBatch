@@ -2,6 +2,11 @@ package com.turing.javaee8.jpamvc.model;
 
 
 
+import java.util.Date;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,11 +18,8 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
-@Entity(name = "books")
-public class Book {
-	@Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-	Long id;
+@Entity
+public class Book extends BaseEntity{
 	
 	@Column
 	String author;
@@ -28,6 +30,5 @@ public class Book {
 	@Column
 	Integer year;
 	
-
 	
 }

@@ -20,7 +20,7 @@ public class BookDaoTest {
 	@Autowired
 	BookDao bookDao;
 	
-	@Test
+	//@Test
 	public void testGetAllBook()
 	{
 		List<Book> books = bookDao.findAll();
@@ -44,18 +44,18 @@ public class BookDaoTest {
 	public void testSaveBook()
 	{
 		Book book = new Book();
-		book.setTitle("Test");
-		book.setAuthor("Test");
-		book.setYear(2025);
+		book.setTitle("Book 2");
+		book.setAuthor("Author 2");
+		book.setYear(2020);
 		
 		this.bookDao.save(book);
 	}
-	//@Test
+	@Test
 	public void testUpdate()
 	{
-		Optional<Book> result = this.bookDao.findById(7L);
+		Optional<Book> result = this.bookDao.findById(2L);
 		Book book = result.get();
-		book.setTitle("Book 7");
+		book.setTitle("Book Two");
 		
 		this.bookDao.save(book);
 	}
