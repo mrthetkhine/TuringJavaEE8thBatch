@@ -12,6 +12,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Rollback;
 
 import com.turing.javaee8.jpamvc.model.Movie;
+import com.turing.javaee8.jpamvc.model.dto.TitleAndYear;
+import com.turing.javaee8.jpamvc.model.dto.TitleWithYear;
 import com.turing.javaee8.jpamvc.repository.MovieDao;
 import com.turing.javaee8.jpamvc.repository.MovieDaoTest;
 
@@ -60,7 +62,7 @@ public class MovieQueryTest {
 		movies.forEach(System.err::println);
 	}
 	
-	@Test
+	//@Test
 	@Transactional
 	public void testJPQL()
 	{
@@ -70,7 +72,55 @@ public class MovieQueryTest {
 		//System.out.println("Row effected "+effectedRow);
 		
 		//Movie movie =this.movieDao.getMovieById(2L);
-		List<Movie> movies  = this.movieDao.getAllMovies();
+		//List<Movie> movies  = this.movieDao.getAllMovies();
+		List<Movie> movies = this.movieDao.getAllMoviesByTitle("men");
+		movies.forEach(System.err::println);
+	}
+	//@Test
+	@Transactional
+	public void testProjection()
+	{
+	
+		/*
+		List<TitleAndYear> titles  = this.movieDao.getAllMovieTitleAndYear();
+		for(TitleAndYear title: titles)
+		{
+			System.err.println("Title "+title.getTitle() +" Year "+title.getYear());
+		}
+		*/
+		/*
+		List<String> titles = this.movieDao.getAllMovieTitle();
+		titles.forEach(System.err::println);
+		*/
+		/*
+		List<TitleWithYear> titles  = this.movieDao.getAllMovieTitleAndYearWithRecord();
+		for(TitleWithYear title: titles)
+		{
+			System.err.println("Title "+title.title() +" Year "+title.year());
+		}
+		*/
+		List<String> details = this.movieDao.getAllMovieDetails();
+		details.forEach(System.err::println);
+	}
+	
+	
+	//@Test
+	@Transactional
+	public void testProjections()
+	{
+		//Long count = this.movieDao.getTotalMovie();
+		//System.err.println("Count "+count);
+		//List<String> genres = this.movieDao.getAllMovieWithGenreGte(2);
+		List<String> genres = this.movieDao.getAllMovieGenere();
+		genres.forEach(System.err::println);
+	}
+	@Test
+	@Transactional
+	public void testJoin()
+	{
+		//List<Movie> movies = this.movieDao.getAllMovieWithActor("Leo");
+		//List<Movie> movies = this.movieDao.getAllMovieLimit(5);
+		List<Movie> movies = this.movieDao.getAllMovieWithNative();
 		movies.forEach(System.err::println);
 	}
 }

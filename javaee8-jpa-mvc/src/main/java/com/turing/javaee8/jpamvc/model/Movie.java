@@ -63,4 +63,8 @@ public class Movie extends BaseEntity {
 			joinColumns = { @JoinColumn(name = "movie_id") },
             inverseJoinColumns = { @JoinColumn(name = "director_id") })
 	private Set<Director> directors = new HashSet<>();
+
+	
+	
+	
 }
