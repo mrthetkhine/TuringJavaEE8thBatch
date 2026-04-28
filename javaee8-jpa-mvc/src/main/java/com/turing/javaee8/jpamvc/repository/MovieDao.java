@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -13,7 +14,7 @@ import com.turing.javaee8.jpamvc.model.dto.TitleAndYear;
 import com.turing.javaee8.jpamvc.model.dto.TitleWithYear;
 
 @Repository
-public interface MovieDao extends JpaRepository<Movie, Long>{
+public interface MovieDao extends JpaRepository<Movie, Long> ,JpaSpecificationExecutor<Movie>{
 	List<Movie> findByTitle(String title);
 	List<Movie> findByTitleLike(String title);
 	List<Movie> findByTitleIgnoreCase(String title);
