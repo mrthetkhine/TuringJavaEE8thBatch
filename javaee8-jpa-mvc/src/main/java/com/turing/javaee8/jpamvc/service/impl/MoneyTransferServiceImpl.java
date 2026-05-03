@@ -29,13 +29,15 @@ public class MoneyTransferServiceImpl implements MoneyTransferService{
 	}
 	void debit(Long fromAccount,Integer amount) throws Exception,FinancialException
 	{
-		Optional<BankAccount> result = this.bankAccountDao.findById(fromAccount);
+		Optional<BankAccount> result = this.bankAccountDao.getAccountById(fromAccount);
 		if(result.isPresent())
 		{
 			BankAccount account = result.get();
 			if(account.getBalance()>= amount)
 			{
+				log.info("Getbalance in debit ==>"+ account.getBalance());
 				account.setBalance( account.getBalance()-amount);
+				
 				this.bankAccountDao.save(account);
 			}
 			else
@@ -44,7 +46,7 @@ public class MoneyTransferServiceImpl implements MoneyTransferService{
 			}
 			try
 			{
-				Thread.sleep(1000);
+				//Thread.sleep(500);
 			}
 			catch(Exception e)
 			{
@@ -58,7 +60,7 @@ public class MoneyTransferServiceImpl implements MoneyTransferService{
 	}
 	void credit(Long fromAccount,Integer amount) throws Exception,FinancialException
 	{
-		Optional<BankAccount> result = this.bankAccountDao.findById(fromAccount);
+		Optional<BankAccount> result = this.bankAccountDao.getAccountById(fromAccount);
 		log.info("Account Name "+result.get().getAccountName());
 		if(result.isPresent())
 		{
