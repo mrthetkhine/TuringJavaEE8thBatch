@@ -10,6 +10,14 @@ public class GreetingServiceImpl implements GreetingService{
 	@Override
 	public String greet() {
 		// TODO Auto-generated method stub
+		try
+		{
+			//Thread.sleep(10_000);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 		return "Hello from service";
 	}
 

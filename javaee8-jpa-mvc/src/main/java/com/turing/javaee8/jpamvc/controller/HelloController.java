@@ -22,6 +22,7 @@ public class HelloController {
 	String hello()
 	{
 		log.info("Inside Hello Controller /hello");
+		
 		return this.greetingService.greet();
 	}
 	@GetMapping(value="/hi")
