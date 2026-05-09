@@ -1,27 +1,25 @@
 package com.turing.javaee8.jpamvc.model.dto;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import com.turing.javaee8.jpamvc.model.Actor;
-import com.turing.javaee8.jpamvc.model.Comment;
-import com.turing.javaee8.jpamvc.model.Director;
-import com.turing.javaee8.jpamvc.model.MovieDetails;
-
-
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
 public class MovieDto {
 
+	@NotBlank(message = "{required.movie.title}")
+	@Size(min = 3, max = 100, message = "{size.movie.title}")
 	String title;
 	
+	@NotNull(message = "{required.movie.year}")
 	Integer year;
 
+	@NotBlank(message = "{required.movie.genre}")
+	@Size(min = 3, max = 100, message = "{size.movie.genre}")
 	String genre;
 	
+	@NotNull(message = "{required.movie.movieDetails}")
 	MovieDetailsDto details;
 	
 	//List<Comment> comments = new ArrayList<>();
