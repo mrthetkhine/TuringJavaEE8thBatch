@@ -52,7 +52,7 @@ public class ApiExceptionHandlerAdvice{
   		    return new ResponseEntity<Object>(
   		      apiError, new HttpHeaders(), apiError.getStatus());
     }
-	/*
+	
 	@ResponseStatus(HttpStatus.BAD_REQUEST)  // 400
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<Object> handleInvalidMethodArgument(MethodArgumentTypeMismatchException be) {
@@ -65,5 +65,5 @@ public class ApiExceptionHandlerAdvice{
   		    return new ResponseEntity<Object>(
   		      apiError, new HttpHeaders(), apiError.getStatus());
     }
-    */
+    
 }

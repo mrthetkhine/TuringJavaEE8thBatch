@@ -8,4 +8,7 @@ public interface MovieService {
 	List<MovieDto> getAllMovie();
 	Optional<MovieDto> getMovieById(Long id);
 	MovieDto saveMovie(MovieDto dto);
+	MovieDto updateMovie(MovieDto dto);
+	MovieDto deleteMovieById(Long id);
+	List<ActorDto> getAllActorInMovie(Long movieId);
 }

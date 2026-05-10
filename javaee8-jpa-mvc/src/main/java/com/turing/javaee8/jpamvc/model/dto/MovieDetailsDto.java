@@ -6,5 +6,7 @@ import lombok.Data;
 @Data
 public class MovieDetailsDto {
 	
+	Long id;
+	
 	String details;
 }

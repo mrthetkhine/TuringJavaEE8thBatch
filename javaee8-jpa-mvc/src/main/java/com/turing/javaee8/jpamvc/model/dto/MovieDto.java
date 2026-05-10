@@ -8,6 +8,8 @@ import lombok.Data;
 @Data
 public class MovieDto {
 
+	Long id;
+	
 	@NotBlank(message = "{required.movie.title}")
 	@Size(min = 3, max = 100, message = "{size.movie.title}")
 	String title;
