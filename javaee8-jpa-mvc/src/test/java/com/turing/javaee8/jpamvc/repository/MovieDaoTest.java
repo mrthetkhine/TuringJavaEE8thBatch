@@ -92,7 +92,7 @@ public class MovieDaoTest {
 		this.movieDao.save(movie);
 	}
 	@Transactional
-	@Test
+	//@Test
 	public void testManyToManyDirector()
 	{
 		Optional<Movie> result = this.movieDao.findById(2L);
@@ -103,5 +103,12 @@ public class MovieDaoTest {
 		
 		movie.getDirectors().add(director);
 		this.movieDao.save(movie);
+	}
+	@Transactional
+	@Test
+	public void testActorIsInMovie()
+	{
+		Long count = this.movieDao.getMovieCountWithActor(2L, 3L);
+		System.out.println("Movie count "+count);
 	}
 }

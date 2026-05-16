@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -95,6 +96,15 @@ public class ActorApiController {
 					SuccessCode.SUCESS.toString(),
 					"Actor updated ok",savedActor);
 		}
+	
+	}
+	@DeleteMapping(value="{id}")
+	ResponseEntity<ApiSuccessResponse<ActorDto>> deleteActor(@PathVariable Long id) 
+	{
+		ActorDto deletedActor = this.actorService.deleteActorById(id);
+		return this.apiUtil.buildSucessResponse(HttpStatus.OK,
+				SuccessCode.SUCESS.toString(),
+				"Actor deleted ok",deletedActor);
 	
 	}
 }

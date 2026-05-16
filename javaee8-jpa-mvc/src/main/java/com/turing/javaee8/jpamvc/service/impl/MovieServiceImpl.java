@@ -7,11 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.turing.javaee8.jpamvc.bean.Mapper;
+import com.turing.javaee8.jpamvc.controller.api.exception.InvalidBusinessLogicException;
 import com.turing.javaee8.jpamvc.controller.api.exception.ResourceNotFoundException;
 import com.turing.javaee8.jpamvc.model.Movie;
 import com.turing.javaee8.jpamvc.model.MovieDetails;
 import com.turing.javaee8.jpamvc.model.dto.ActorDto;
 import com.turing.javaee8.jpamvc.model.dto.MovieDto;
+import com.turing.javaee8.jpamvc.repository.ActorDao;
 import com.turing.javaee8.jpamvc.repository.MovieDao;
 import com.turing.javaee8.jpamvc.service.MovieService;
 
@@ -26,6 +28,9 @@ public class MovieServiceImpl implements MovieService{
 	
 	@Autowired
 	MovieDao movieDao;
+	
+	@Autowired
+	ActorDao actorDao;
 	
 	@Override
 	public List<MovieDto> getAllMovie() {
@@ -93,6 +98,29 @@ public class MovieServiceImpl implements MovieService{
 				.findById(movieId)
 				.map(movie->this.mapper.mapSet(movie.getActors(), ActorDto.class))
 				.orElseThrow(()->new ResourceNotFoundException("Movie "+movieId +" not found"));
+	}
+
+	@Override
+	public MovieDto assignActorToMovie(Long movieId, Long actorId) {
+		return this.movieDao	
+					.findById(movieId)
+					.map(movie-> {
+						return this.actorDao
+								.findById(actorId)
+								.map(actor->{
+									Long count = this.movieDao.getMovieCountWithActor(movieId, actorId);
+									if(count >0)
+									{
+										throw new InvalidBusinessLogicException("Actor already exist in movi e");
+									}
+									
+									movie.getActors().add(actor);
+									return this.movieDao.save(movie);
+								})
+								.map(m->this.mapper.map(m, MovieDto.class))
+								.orElseThrow(()->new ResourceNotFoundException("Actor "+actorId +" not found"));
+					})
+					.orElseThrow(()->new ResourceNotFoundException("Movie "+movieId +" not found"));
 	}
 
 	

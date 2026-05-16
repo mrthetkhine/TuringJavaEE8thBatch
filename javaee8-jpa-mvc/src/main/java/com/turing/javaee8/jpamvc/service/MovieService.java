@@ -11,4 +11,5 @@ public interface MovieService {
 	MovieDto updateMovie(MovieDto dto);
 	MovieDto deleteMovieById(Long id);
 	List<ActorDto> getAllActorInMovie(Long movieId);
+	MovieDto assignActorToMovie(Long movieId,Long actorId);
 }

@@ -87,4 +87,7 @@ public interface MovieDao extends JpaRepository<Movie, Long> ,JpaSpecificationEx
 	
 	@Query(value="SELECT * FROM Movie",nativeQuery=true)
 	List<Movie> getAllMovieWithNative();
+	
+	@Query("select count(m) from Movie m left join actors act where m.id=:movieId and act.id=:actorId")
+	Long getMovieCountWithActor(Long movieId, Long actorId);
 }

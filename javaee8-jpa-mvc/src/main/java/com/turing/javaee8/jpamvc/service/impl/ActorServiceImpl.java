@@ -64,4 +64,17 @@ public class ActorServiceImpl implements ActorService{
 		
 	}
 
+	@Override
+	public ActorDto deleteActorById(Long id) {
+		return this.actorDao
+				.findById(id)
+				.map(actor->{
+	
+					this.actorDao.deleteById(id);
+					return actor;
+				})
+				.map(actor->this.mapper.map(actor, ActorDto.class))
+				.orElseThrow(()->new ResourceNotFoundException("Actor " +id+" Not found"));
+	}
+
 }

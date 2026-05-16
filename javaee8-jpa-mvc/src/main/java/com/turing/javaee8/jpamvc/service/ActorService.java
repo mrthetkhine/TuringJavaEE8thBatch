@@ -8,4 +8,5 @@ public interface ActorService {
 	Optional<ActorDto> getActorById(Long id);
 	ActorDto saveActor(ActorDto dto);
 	ActorDto updateActor(ActorDto dto);
+	ActorDto deleteActorById(Long id);
 }

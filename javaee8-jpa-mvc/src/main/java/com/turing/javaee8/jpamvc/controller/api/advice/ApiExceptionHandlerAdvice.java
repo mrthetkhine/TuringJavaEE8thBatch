@@ -52,7 +52,18 @@ public class ApiExceptionHandlerAdvice{
   		    return new ResponseEntity<Object>(
   		      apiError, new HttpHeaders(), apiError.getStatus());
     }
-	
+	@ResponseStatus(HttpStatus.BAD_REQUEST)  // 400
+    @ExceptionHandler(InvalidBusinessLogicException.class)
+    public ResponseEntity<Object> handleInvalidBusinessLogic(InvalidBusinessLogicException be) {
+        log.info("InvalidBusinessLogicException exception handled "+be.getMessage());
+       
+        
+        String error = be.getMessage(); 
+        ApiErrorResponse apiError = 
+  		      new ApiErrorResponse(HttpStatus.BAD_REQUEST, ErrorCode.INVALID_BUSINESS_LOGIC.toString(), be.getLocalizedMessage(), error);
+  		    return new ResponseEntity<Object>(
+  		      apiError, new HttpHeaders(), apiError.getStatus());
+    }
 	@ResponseStatus(HttpStatus.BAD_REQUEST)  // 400
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<Object> handleInvalidMethodArgument(MethodArgumentTypeMismatchException be) {

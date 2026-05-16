@@ -109,12 +109,21 @@ public class MovieApiController {
 	@GetMapping(value="/{id}/actors")
 	ResponseEntity<ApiSuccessResponse<List<ActorDto>>> getAllActorInMovie(@PathVariable Long id)
 	{
-		log.info("Movie get by id "+id);
+		log.info("getAllActorInMovie id "+id);
 		List<ActorDto> actors = this.movieService.getAllActorInMovie(id);
 		
 		return this.apiUtil.buildSucessResponse(HttpStatus.OK,
 												SuccessCode.SUCESS.toString(),
 												"Movie "+id+" returned",actors);
 		
+	}
+	@PostMapping(value="/{movieId}/assignment/actors/{actorId}")
+	ResponseEntity<ApiSuccessResponse<MovieDto>> assignActorToMovie(@PathVariable Long movieId,@PathVariable Long actorId)
+	{
+		log.info("assignActorToMovie ");
+		MovieDto movie = this.movieService.assignActorToMovie(movieId, actorId);
+		return this.apiUtil.buildSucessResponse(HttpStatus.OK,
+				SuccessCode.SUCESS.toString(),
+				"Actor assigned to movie",movie);
 	}
 }
