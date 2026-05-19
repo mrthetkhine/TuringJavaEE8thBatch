@@ -33,7 +33,7 @@ CREATE TABLE `actor` (
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `actor` (
 
 LOCK TABLES `actor` WRITE;
 /*!40000 ALTER TABLE `actor` DISABLE KEYS */;
-INSERT INTO `actor` VALUES (1,'Leonardo','DiCaprio','1974-12-11 00:00:00',0,'2026-04-19 18:58:04','2026-04-19 18:58:04'),(2,'Kate','WinSlet','1975-11-05 00:00:00',1,'2026-04-19 19:00:28','2026-04-19 19:00:28'),(3,'Tom','Hank','1975-11-05 00:00:00',0,'2026-04-19 19:00:28',NULL);
+INSERT INTO `actor` VALUES (1,'Leonardo','DiCaprio','1974-12-11 00:00:00',0,'2026-04-19 18:58:04','2026-04-19 18:58:04'),(2,'Kate','WinSlet','1975-11-05 00:00:00',1,'2026-04-19 19:00:28','2026-04-19 19:00:28'),(3,'Tom','Hank','1975-11-05 00:00:00',0,'2026-04-19 19:00:28',NULL),(4,'Smauel M','Jackson','2025-07-22 19:58:10',0,'2026-05-10 19:57:14','2026-05-10 20:14:59');
 /*!40000 ALTER TABLE `actor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,7 +58,7 @@ CREATE TABLE `actor_in_movie` (
   `movie_id` int DEFAULT NULL,
   `actor_id` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +67,7 @@ CREATE TABLE `actor_in_movie` (
 
 LOCK TABLES `actor_in_movie` WRITE;
 /*!40000 ALTER TABLE `actor_in_movie` DISABLE KEYS */;
-INSERT INTO `actor_in_movie` VALUES (4,2,1),(6,2,2),(7,4,3);
+INSERT INTO `actor_in_movie` VALUES (4,2,1),(6,2,2),(7,4,3),(8,4,4);
 /*!40000 ALTER TABLE `actor_in_movie` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -250,7 +250,7 @@ CREATE TABLE `movie` (
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -259,7 +259,7 @@ CREATE TABLE `movie` (
 
 LOCK TABLES `movie` WRITE;
 /*!40000 ALTER TABLE `movie` DISABLE KEYS */;
-INSERT INTO `movie` VALUES (2,'Titanic',1997,'Drama','2026-04-19 20:10:59','2026-04-19 20:10:59'),(3,'The Dark Night',2005,'Drama','2026-04-19 20:13:31','2026-04-19 20:13:31'),(4,'Third',2005,'Drama','2026-04-19 20:14:57','2026-04-19 20:14:57'),(12,'Fourth',2010,'Crime','2026-04-19 20:13:31','2026-04-19 20:13:31'),(13,'Avatar',2018,'Sci-Fi','2026-04-19 20:13:31','2026-04-19 20:13:31'),(14,'xmen',2019,'Sci-Fi','2026-04-19 20:13:31','2026-04-19 20:13:31'),(15,'IronMan',2020,'Sci-Fi','2026-04-19 20:13:31','2026-04-19 20:13:31'),(16,'A day after another',2026,'Action','2026-04-19 20:13:31','2026-04-19 20:13:31'),(18,'Forrest Gump',200,'Drama','2026-04-25 20:14:54',NULL);
+INSERT INTO `movie` VALUES (2,'Titanic',1997,'Drama','2026-04-19 20:10:59','2026-04-19 20:10:59'),(3,'The Dark Night',2005,'Drama','2026-04-19 20:13:31','2026-04-19 20:13:31'),(4,'Shaft',2005,'Drama','2026-04-19 20:14:57','2026-04-19 20:14:57'),(12,'Fourth',2010,'Crime','2026-04-19 20:13:31','2026-04-19 20:13:31'),(13,'Avatar',2018,'Sci-Fi','2026-04-19 20:13:31','2026-04-19 20:13:31'),(14,'xmen',2019,'Sci-Fi','2026-04-19 20:13:31','2026-04-19 20:13:31'),(15,'IronMan',2020,'Sci-Fi','2026-04-19 20:13:31','2026-04-19 20:13:31'),(16,'A day after another',2026,'Action','2026-04-19 20:13:31','2026-04-19 20:13:31'),(18,'Forrest Gump',200,'Drama','2026-04-25 20:14:54',NULL),(19,'Movie X-Mean',2010,'Sci-Fi','2026-05-09 20:10:10','2026-05-09 20:10:10'),(20,'Movie X-Man-2',2010,'Sci-Fi','2026-05-09 20:11:36','2026-05-09 20:11:36'),(23,'Movie X-Man-3 update',2010,'Sci-Fi','2026-05-10 18:35:34','2026-05-10 18:54:52');
 /*!40000 ALTER TABLE `movie` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -277,7 +277,7 @@ CREATE TABLE `movie_details` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -286,8 +286,62 @@ CREATE TABLE `movie_details` (
 
 LOCK TABLES `movie_details` WRITE;
 /*!40000 ALTER TABLE `movie_details` DISABLE KEYS */;
-INSERT INTO `movie_details` VALUES (1,2,'A Good flim','2026-04-19 20:10:59','2026-04-19 20:10:59'),(2,3,'A Good flim','2026-04-19 20:13:31','2026-04-19 20:13:31'),(3,4,'A Good flim','2026-04-19 20:14:57','2026-04-19 20:14:57');
+INSERT INTO `movie_details` VALUES (1,2,'A Good flim','2026-04-19 20:10:59','2026-04-19 20:10:59'),(2,3,'A Good flim','2026-04-19 20:13:31','2026-04-19 20:13:31'),(3,4,'A Good flim','2026-04-19 20:14:57','2026-04-19 20:14:57'),(4,NULL,'Mutuant movie','2026-05-09 20:10:10','2026-05-09 20:10:10'),(7,23,'Mutuant movie-3 update','2026-05-10 18:35:34','2026-05-10 18:54:52');
 /*!40000 ALTER TABLE `movie_details` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `role`
+--
+
+DROP TABLE IF EXISTS `role`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `role` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `role` varchar(45) DEFAULT NULL,
+  `user_id` varchar(45) DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `role`
+--
+
+LOCK TABLES `role` WRITE;
+/*!40000 ALTER TABLE `role` DISABLE KEYS */;
+INSERT INTO `role` VALUES (1,'ROLE_ADMIN','1','2026-05-17 19:59:49','2026-05-17 19:59:49'),(2,'ROLE_USER','2','2026-05-17 20:00:54','2026-05-17 20:00:54');
+/*!40000 ALTER TABLE `role` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'admin','$2a$10$J./fjMVhMkSP8aZboAZ2NOBUKj6sq1WBjhYHotm.jWfiMIDqFD7S2','2026-05-17 19:59:49','2026-05-17 19:59:49'),(2,'user','$2a$10$2g8.Y20E1iHtLwfUF44VUOOakI7vJVsMB68lA.UhTNUtL/dH6r8s6','2026-05-17 20:00:54','2026-05-17 20:00:54');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -299,4 +353,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-05-05 21:26:27
+-- Dump completed on 2026-05-19 21:23:01
