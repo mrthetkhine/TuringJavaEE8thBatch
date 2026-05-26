@@ -8,6 +8,17 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public class CombineTest {
+	static Mono<Integer> getData(int i)
+	{
+		if(i>0)
+		{
+			return Mono.just(i);
+		}
+		else
+		{
+			return Mono.empty();
+		}
+	}
 	//@Test
 	public void testCombine()
 	{
@@ -30,7 +41,7 @@ public class CombineTest {
 			});
 		Delay.delay(3000);
 	}
-	@Test
+	//@Test
 	public void testAnd()
 	{
 		var first = Mono.fromCallable(()->{
@@ -65,5 +76,122 @@ public class CombineTest {
 			
 			//.
 		Delay.delay(3000);
+	}
+	//@Test
+	public void testRepeat()
+	{
+		var first = Flux.just(1,2,3,4)
+						.delayElements(Duration.ofMillis(200))
+						.repeat(3);
+		first.subscribe(item->{
+			System.out.println("Repat item "+item);
+		});
+		Delay.delay(5000);
+	}
+	//@Test
+	public void testEmptySwitch()
+	{
+		var first = getData(10);
+		
+		first
+		//.defaultIfEmpty(100)
+		.switchIfEmpty(Mono.just(100))
+		.map(item->{
+			System.out.println("Map "+item);
+			return item*2;
+		})
+		.subscribe(item->{
+			System.out.println("GetData item "+item);
+		});
+		Delay.delay(2000);
+	}
+	//@Test
+	public void testIgnore()
+	{
+		var first = getData(10);
+		
+		first
+		.ignoreElement()
+		.map(item->{
+			System.out.println("Map "+item);
+			return item*2;
+		})
+		.subscribe(item->{
+			System.out.println("GetData item "+item);
+		});
+		
+		Delay.delay(2000);
+	}
+	//@Test
+	public void testThen()
+	{
+		Mono<Integer> first = Mono.defer(()->{
+			System.err.println("Execute first");
+			return Mono.just(100)
+						.delayElement(Duration.ofMillis(2000))
+						.map(item->{
+							System.out.println("Emit first");
+							return item;
+						});
+		});
+		Mono<Integer> second = Mono.defer(()->{
+			System.err.println("Execute second");
+			return Mono.just(200)
+						.delayElement(Duration.ofMillis(1000))
+						.map(item->{
+							System.out.println("Emit second");
+							return item;
+						});
+		});
+		Mono<Void> third = Mono.defer(()->{
+			System.err.println("Execute third");
+			return Mono.just(100)
+						.delayElement(Duration.ofMillis(1000))
+						.map(item->{
+							System.out.println("Emit third");
+							return item;
+						}).then();
+						
+		});
+		/*
+		first.then(second)
+			 .subscribe();
+			 */
+		/*
+		first.thenEmpty(third)
+		 	 .subscribe();
+		 	 */
+		/*
+		first
+		//.thenReturn(100)
+			.subscribe(item->{
+				System.out.println("thenRetrun "+item);
+			});
+			*/
+		first
+			.thenMany(Flux.just(1,2,3))
+			.subscribe(item->{
+				System.out.println("thenMany "+item);
+			});
+		
+		Delay.delay(4000);
+	}
+	@Test
+	public void testDelayUntil()
+	{
+		Flux<Integer> items = Flux.just(1,2,3);
+		
+		items
+		.delayUntil(item->Mono.just(item)
+							  .delayElement(Duration.ofMillis(100))	)
+		.map(item->{
+			System.out.println("Map "+item);
+			return item*2;
+		})
+		.subscribe(item->{
+			System.out.println("GetData item "+item);
+		});
+		
+		Delay.delay(2000);
 	}
 }
