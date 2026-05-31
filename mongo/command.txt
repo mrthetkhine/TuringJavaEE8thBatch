@@ -238,6 +238,10 @@ db.inventory.find( { 'instock.0.qty': { $lte: 20 } } )
 //Problem
 db.inventory.find( { "instock.qty": { $gt: 10,  $lte: 20 } } )
 
+db.inventory.find( { "instock": { $elemMatch: { qty: {
+    $gt: 10,  $lte: 20
+} } } } )
+
 //project
 
 db.inventory.find({},{"item":1})
@@ -246,6 +250,15 @@ db.inventory.find({},{"item":0})
 
 db.inventory.find( { status: "A" }, { item: 1, status: 1, _id: 0 } )
 
+//update 
+
+db.inventory.updateOne( { _id: 1 }, [ { $set: { "cost": { $literal: "$27" } } } ] )
+
+db.inventory.updateOne( {_id: ObjectId('6a1c27e4322a958b82fe4443') }, [ { $set: { "cost": { $literal: "$27" } } } ] )
+
+db.inventory.updateOne( {_id: ObjectId('6a1c27e4322a958b82fe4443') }, [ { $unset: ["cost"] } ] )
+
+db.inventory.deleteOne( {_id: ObjectId('6a1c27e4322a958b82fe4443') } )
 aggregation pipeline
 
 db.movies.aggregate([
