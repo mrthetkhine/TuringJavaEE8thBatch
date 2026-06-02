@@ -44,7 +44,7 @@ public class TestActorRepository {
 					.expectComplete();
 		Delay.delay(2000);
 	}
-	@Test
+	//@Test
 	void testFindAll()
 	{
 		this.actorDao.findAll()
@@ -52,6 +52,22 @@ public class TestActorRepository {
 					.map(actor->actor.getFirstName() + ' '+actor.getLastName())
 					.subscribe(System.out::println);
 		
+		Delay.delay(2000);
+	}
+	@Test
+	void testFindById()
+	{
+		Actor dummy = new Actor();
+		dummy.setFirstName("Dummy");
+		dummy.setLastName("Actor");
+		this.actorDao.findById("6a1c3a1024ff462a99abb26b")
+					 .switchIfEmpty(Mono.error(new RuntimeException("Actor not found")))
+					 .onErrorReturn(dummy)
+					 .subscribe(actor->{
+						System.out.println("Actor "+actor); 
+					 },err->{
+						 System.out.println("Err "+err.getMessage()); 
+					 });	
 		Delay.delay(2000);
 	}
 }
