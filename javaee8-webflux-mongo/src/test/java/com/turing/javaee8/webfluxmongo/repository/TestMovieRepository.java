@@ -39,10 +39,10 @@ public class TestMovieRepository {
 	void testSave()
 	{
 		Movie movie = new Movie();
-		movie.setTile("Forrest Gump");
+		movie.setTitle("Forrest Gump");
 		
-		movie.getGeneres().add("Comedy");
-		movie.getGeneres().add("Romance");
+		movie.getGenres().add("Comedy");
+		movie.getGenres().add("Romance");
 
 		movie.setDirector("Robert Zemeckis");
 		

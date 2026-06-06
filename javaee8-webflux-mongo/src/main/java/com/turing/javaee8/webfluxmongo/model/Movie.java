@@ -17,11 +17,11 @@ public class Movie {
 	@Id
     private String id;
 	
-	String tile;
+	String title;
 	Integer year;
 	String director;
 	
-	ArrayList<String> generes = new ArrayList<>();
+	ArrayList<String> genres = new ArrayList<>();
 	
 	//Embedded model
 	MovieDetails details;

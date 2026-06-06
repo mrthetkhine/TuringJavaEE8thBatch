@@ -3,13 +3,18 @@ package com.turing.javaee8.webfluxmongo.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.turing.javaee8.webfluxmongo.common.Mapper;
+import com.turing.javaee8.webfluxmongo.dto.MovieDto;
 import com.turing.javaee8.webfluxmongo.model.Movie;
 import com.turing.javaee8.webfluxmongo.repository.ActorRepository;
 import com.turing.javaee8.webfluxmongo.repository.MovieRepository;
 import com.turing.javaee8.webfluxmongo.service.MovieService;
 
+import lombok.extern.slf4j.Slf4j;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+@Slf4j
 @Service
 public class MovieServiceImpl implements MovieService{
 	@Autowired
@@ -18,8 +23,10 @@ public class MovieServiceImpl implements MovieService{
 	@Autowired
 	ActorRepository actorDao;
 
+	@Autowired
+	Mapper mapper;
 	@Override
-	public Mono<Movie> assignActorToMovie(String movieId, String actorId) {
+	public Mono<MovieDto> assignActorToMovie(String movieId, String actorId) {
 		return this.movieDao.findById(movieId)
 				 .switchIfEmpty(Mono.error(new RuntimeException("Movie id "+movieId+" not found")))	
 				 .flatMap(movie->{
@@ -32,25 +39,83 @@ public class MovieServiceImpl implements MovieService{
 						 				 movie.getActors().add(actor);
 						 				 return this.movieDao.save(movie);
 					 			  });
-				 });
+				 })
+				 .map(movie->this.mapper.map(movie, MovieDto.class));
 	}
 
 	@Override
-	public Mono<Movie> addGenreToMovie(String movieId, String genre) {
+	public Mono<MovieDto> addGenreToMovie(String movieId, String genre) {
 		
 		return this.movieDao.findById(movieId)
 				.switchIfEmpty(Mono.error(new RuntimeException("Movie id "+movieId+" not found")))
 				.flatMap(movie->{
-					if(movie.getGeneres().contains(genre))
+					if(movie.getGenres().contains(genre))
 					{
 						return Mono.error(new RuntimeException("Genre "+genre+ " Already exist"));
 					}
 					else
 					{
-						movie.getGeneres().add(genre);
+						movie.getGenres().add(genre);
 						return this.movieDao.save(movie);
 					}
 					
-				});
+				})
+				.map(movie->this.mapper.map(movie, MovieDto.class));
+	}
+
+	@Override
+	public Flux<MovieDto> getAllMovie() {
+		
+		return this.movieDao.findAll()
+					.map(movie->this.mapper.map(movie, MovieDto.class));
+	}
+
+	@Override
+	public Mono<MovieDto> getMovieById(String id) {
+		return this.movieDao
+				.findById(id)
+				.switchIfEmpty(Mono.error(new RuntimeException("Movie id "+id +" not found")))
+				.map(movie->this.mapper.map(movie, MovieDto.class));
+	}
+
+	@Override
+	public Mono<MovieDto> saveMovie(MovieDto movieDto) {
+		
+		Movie movie = this.mapper.map(movieDto, Movie.class);
+		return this.movieDao
+					.save(movie)
+					.map(m->this.mapper.map(m, MovieDto.class));
+	}
+
+	@Override
+	public Mono<MovieDto> updateMovie(MovieDto dto) {
+		
+		return this.movieDao
+				.findById(dto.getId())
+				.switchIfEmpty(Mono.error(new RuntimeException("Movie id "+dto.getId() +" not found")))
+				.flatMap(movie->{
+					movie.setTitle(dto.getTitle());
+					movie.setYear(dto.getYear());
+					movie.getDetails().setDetails(dto.getDetails().getDetails());
+					movie.setGenres(dto.getGenres());
+					
+					return this.movieDao.save(movie);
+				})
+				.map(m->this.mapper.map(m, MovieDto.class));
+	}
+
+	@Override
+	public Mono<MovieDto> deleteMovie(String id) {
+		
+		return this.movieDao
+				.findById(id)
+				.switchIfEmpty(Mono.error(new RuntimeException("Movie id "+id +" not found")))
+				.flatMap(movie->{
+					return this.movieDao
+							.deleteById(id)
+							.then(Mono.just(movie));
+					
+				})
+				.map(m->this.mapper.map(m, MovieDto.class));
 	}
 }
