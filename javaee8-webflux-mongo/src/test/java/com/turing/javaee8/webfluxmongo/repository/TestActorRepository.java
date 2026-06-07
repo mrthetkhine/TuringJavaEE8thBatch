@@ -54,7 +54,7 @@ public class TestActorRepository {
 		
 		Delay.delay(2000);
 	}
-	@Test
+	//@Test
 	void testFindById()
 	{
 		Actor dummy = new Actor();
@@ -68,6 +68,14 @@ public class TestActorRepository {
 					 },err->{
 						 System.out.println("Err "+err.getMessage()); 
 					 });	
+		Delay.delay(2000);
+	}
+	@Test
+	void testFindByFirstName()
+	{
+		this.actorDao.findByFirstName("Leonardo")
+					.subscribe(System.out::println);
+		
 		Delay.delay(2000);
 	}
 }

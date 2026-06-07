@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.turing.javaee8.webfluxmongo.common.Mapper;
 import com.turing.javaee8.webfluxmongo.dto.MovieDto;
 import com.turing.javaee8.webfluxmongo.model.Movie;
+import com.turing.javaee8.webfluxmongo.model.Actor;
 import com.turing.javaee8.webfluxmongo.repository.ActorRepository;
 import com.turing.javaee8.webfluxmongo.repository.MovieRepository;
 import com.turing.javaee8.webfluxmongo.service.MovieService;
@@ -13,6 +14,9 @@ import com.turing.javaee8.webfluxmongo.service.MovieService;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.*;
+import java.util.function.Predicate;
 
 @Slf4j
 @Service
@@ -117,5 +121,40 @@ public class MovieServiceImpl implements MovieService{
 					
 				})
 				.map(m->this.mapper.map(m, MovieDto.class));
+	}
+
+	@Override
+	public Flux<MovieDto> getAllMovieWhereActorIn(String firstName) {
+		
+		return this.actorDao
+					.findByFirstName(firstName)
+					.flatMapMany(actor->{
+						return this.movieDao.getMovieWithActorId(actor.getId());
+					})
+					.map(m->this.mapper.map(m, MovieDto.class));
+	}
+
+	@Override
+	public Flux<MovieDto> getAllMovieWhereActorInV2(String firstName) {
+		
+		return this.movieDao
+				.findAll()
+				.filter(movieContainsActor(firstName))
+				.map(m->this.mapper.map(m, MovieDto.class));
+	}
+
+	private Predicate<? super Movie> movieContainsActor(String firstName) {
+		return movie->{
+			boolean containActor = false;
+			
+			for(Actor act : movie.getActors())
+			{
+				if(act.getFirstName().contains(firstName))
+				{
+					containActor = true;
+				}
+			}
+			return containActor;
+		};
 	}
 }

@@ -64,4 +64,21 @@ public class ActorServiceImpl implements ActorService{
 				.map(act->this.mapper.map(act,ActorDto.class));
 	}
 
+	@Override
+	public Mono<ActorDto> updateActor(ActorDto actorDto) {
+		
+		return this.actorDao
+					.findById(actorDto.getId())
+					.switchIfEmpty(Mono.error(new RuntimeException("Actor "+actorDto.getId()+" Not found")))
+					.flatMap(actor->{
+						actor.setFirstName(actorDto.getFirstName());
+						actor.setLastName(actorDto.getLastName());
+						actor.setGender(actorDto.getGender());
+						
+						return this.actorDao.save(actor);
+						
+					})
+					.map(act->this.mapper.map(act,ActorDto.class));
+	}
+
 }

@@ -9,5 +9,6 @@ public interface ActorService {
 	Flux<ActorDto> getAllActors();
 	Mono<ActorDto> getActorById(String id);
 	Mono<ActorDto> saveActor(ActorDto actorDto);
+	Mono<ActorDto> updateActor(ActorDto actorDto);
 	Mono<ActorDto> deleteAcotrById(String id);
 }

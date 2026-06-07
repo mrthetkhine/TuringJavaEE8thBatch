@@ -26,9 +26,12 @@ public class MovieServiceTest {
 	{
 		String movieId = "6a1eddae0b28c1c36e45007d";
 		String genre="Drama";
-		this.movieService.addGenreToMovie(movieId, genre)
+		this.movieService
+				//.addGenreToMovie(movieId, genre)
+				//.getAllMovieWhereActorIn("Leonardo")
+				.getAllMovieWhereActorInV2("Leonardo")
 						.subscribe(movie->{
-							System.out.println("Assigned ");
+							System.out.println("movie "+movie);
 						},err->{
 							System.out.println("Err "+err);
 							

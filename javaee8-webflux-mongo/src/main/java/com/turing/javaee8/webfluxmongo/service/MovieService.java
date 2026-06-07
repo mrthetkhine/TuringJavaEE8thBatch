@@ -13,4 +13,6 @@ public interface MovieService {
 	Mono<MovieDto> updateMovie(MovieDto movie);
 	Mono<MovieDto> assignActorToMovie(String movieId,String actorId);
 	Mono<MovieDto> addGenreToMovie(String movieId,String genre);
+	Flux<MovieDto> getAllMovieWhereActorIn(String firstName);
+	Flux<MovieDto> getAllMovieWhereActorInV2(String firstName);
 }

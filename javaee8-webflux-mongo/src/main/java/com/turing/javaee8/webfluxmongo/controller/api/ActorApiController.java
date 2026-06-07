@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,7 +34,7 @@ public class ActorApiController {
 	
 	
 	@GetMapping
-	Mono<ResponseEntity<RestResponse>> getAllMovies()
+	Mono<ResponseEntity<RestResponse>> getAllActors()
 	{
 		return this.actorService
 					.getAllActors()
@@ -60,6 +61,22 @@ public class ActorApiController {
 				.flatMap(movie->this.util.succesResponse(HttpStatus.CREATED, 
 						"Actor created", movie)
 						);
+					
+	}
+	@PutMapping(value="/{actorId}")
+	Mono<ResponseEntity<RestResponse>> updateActor(@PathVariable String actorId,
+			@Valid @RequestBody Mono<ActorDto> dtoMono)
+	{
+		return dtoMono 
+				.map(dto->{
+					dto.setId(actorId);
+					return dto;
+				})
+				.flatMap(dto->this.actorService.updateActor(dto))
+				.flatMap(movie->this.util.succesResponse(HttpStatus.OK, 
+						"Actor updated", movie)
+						)
+				.onErrorResume(err->this.util.errorResponse(HttpStatus.BAD_REQUEST, err.getMessage(), err.getLocalizedMessage()));
 					
 	}
 	@DeleteMapping(value="/{actorId}")
