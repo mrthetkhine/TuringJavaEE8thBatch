@@ -15,4 +15,5 @@ public interface MovieService {
 	Mono<MovieDto> addGenreToMovie(String movieId,String genre);
 	Flux<MovieDto> getAllMovieWhereActorIn(String firstName);
 	Flux<MovieDto> getAllMovieWhereActorInV2(String firstName);
+	Flux<MovieDto> getAllMovieWithAverageRatingGt(int averageRating);
 }

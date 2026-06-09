@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.turing.javaee8.webfluxmongo.common.ResponseUtil;
 import com.turing.javaee8.webfluxmongo.dto.MovieDto;
 import com.turing.javaee8.webfluxmongo.dto.RestResponse;
+import com.turing.javaee8.webfluxmongo.dto.ReviewDto;
 import com.turing.javaee8.webfluxmongo.service.MovieService;
+import com.turing.javaee8.webfluxmongo.service.ReviewService;
 
 import jakarta.validation.Valid;
 import reactor.core.publisher.Mono;
@@ -29,6 +31,9 @@ public class MovieApiController {
 	
 	@Autowired
 	ResponseUtil util;
+	
+	@Autowired
+	ReviewService reviewService;
 	
 	@GetMapping
 	Mono<ResponseEntity<RestResponse>> getAllMovies()
@@ -80,7 +85,7 @@ public class MovieApiController {
 	{
 		return  this.movieService.deleteMovie(movieId)
 				.flatMap(movie->this.util.succesResponse(HttpStatus.OK, 
-						"Movie updated", movie)
+						"Movie deleted", movie)
 						)
 				.onErrorResume(err->this.util.errorResponse(HttpStatus.BAD_REQUEST, err.getMessage(), err.getLocalizedMessage()));
 					
@@ -91,6 +96,56 @@ public class MovieApiController {
 		return this.movieService.assignActorToMovie(movieId, actorId)
 				.flatMap(movie->this.util.succesResponse(HttpStatus.OK, 
 						"Actor assigned to movie", movie)
+						)
+				.onErrorResume(err->this.util.errorResponse(HttpStatus.BAD_REQUEST, err.getMessage(), err.getLocalizedMessage()));
+					
+	}
+	@GetMapping(value="/{movieId}/reviews")
+	Mono<ResponseEntity<RestResponse>> getAllReviewByMovieId(@PathVariable String movieId)
+	{	
+	return  this.reviewService.getReviewByMovieId(movieId)
+			.collectList()//Mono<List<ReviewDto>>
+			.flatMap(movie->this.util.succesResponse(HttpStatus.OK, 
+						"Review returned", movie)
+						)
+			.onErrorResume(err->this.util.errorResponse(HttpStatus.BAD_REQUEST, err.getMessage(), err.getLocalizedMessage()));
+					
+	}
+	@PostMapping(value="/{movieId}/reviews")
+	Mono<ResponseEntity<RestResponse>> saveReview(@PathVariable String movieId,@Valid @RequestBody Mono<ReviewDto> reviewDto)
+	{	
+	return reviewDto
+			.flatMap(dto->{
+				dto.setMovieId(movieId);
+				return this.reviewService.saveReview(dto);
+			})
+			.flatMap(movie->this.util.succesResponse(HttpStatus.CREATED, 
+						"Review saved", movie)
+						)
+			.onErrorResume(err->this.util.errorResponse(HttpStatus.BAD_REQUEST, err.getMessage(), err.getLocalizedMessage()));
+					
+	}
+	@PutMapping(value="/{movieId}/reviews/{reviewId}")
+	Mono<ResponseEntity<RestResponse>> updateReview(@PathVariable String movieId,@PathVariable String reviewId,@Valid @RequestBody Mono<ReviewDto> reviewDto)
+	{	
+	return reviewDto
+			.flatMap(dto->{
+				dto.setMovieId(movieId);
+				dto.setId(reviewId);
+				return this.reviewService.updateReview(dto);
+			})
+			.flatMap(movie->this.util.succesResponse(HttpStatus.OK, 
+						"Review saved", movie)
+						)
+			.onErrorResume(err->this.util.errorResponse(HttpStatus.BAD_REQUEST, err.getMessage(), err.getLocalizedMessage()));
+					
+	}
+	@DeleteMapping(value="/reviews/{reviewId}")
+	Mono<ResponseEntity<RestResponse>> deleteReviewById(@PathVariable String reviewId)
+	{
+		return  this.reviewService.deleteReviewById(reviewId)
+				.flatMap(movie->this.util.succesResponse(HttpStatus.OK, 
+						"Review deleted", movie)
 						)
 				.onErrorResume(err->this.util.errorResponse(HttpStatus.BAD_REQUEST, err.getMessage(), err.getLocalizedMessage()));
 					

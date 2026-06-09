@@ -9,6 +9,7 @@ import com.turing.javaee8.webfluxmongo.model.Movie;
 import com.turing.javaee8.webfluxmongo.model.Actor;
 import com.turing.javaee8.webfluxmongo.repository.ActorRepository;
 import com.turing.javaee8.webfluxmongo.repository.MovieRepository;
+import com.turing.javaee8.webfluxmongo.repository.ReviewRepository;
 import com.turing.javaee8.webfluxmongo.service.MovieService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +24,9 @@ import java.util.function.Predicate;
 public class MovieServiceImpl implements MovieService{
 	@Autowired
 	MovieRepository movieDao;
+	
+	@Autowired
+	ReviewRepository reviewDao;
 	
 	@Autowired
 	ActorRepository actorDao;
@@ -156,5 +160,18 @@ public class MovieServiceImpl implements MovieService{
 			}
 			return containActor;
 		};
+	}
+
+	@Override
+	public Flux<MovieDto> getAllMovieWithAverageRatingGt(int averageRating) {
+		
+		return null;
+		/*
+		return this.reviewDao 
+					.findAll()
+					.groupBy(review->{
+						return review.getMovie().getId();
+					});
+		*/
 	}
 }
