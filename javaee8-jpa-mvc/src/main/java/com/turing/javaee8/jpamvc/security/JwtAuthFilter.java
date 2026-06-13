@@ -29,12 +29,12 @@ private final CustomUserDetailsService userDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        log.info("JWT Filter");
+        //log.info("JWT Filter");
     	if (request.getServletPath().contains("/api/auth")) {
             filterChain.doFilter(request, response);
             return;
         }
-    	log.info("get auth header");
+    	//log.info("get auth header");
         final String authorizationHeader = request.getHeader("Authorization");
         final String jwtToken;
         final String username;
@@ -43,11 +43,11 @@ private final CustomUserDetailsService userDetailsService;
             filterChain.doFilter(request, response);
             return;
         }
-        log.info("Check token");
+        //log.info("Check token");
         jwtToken = authorizationHeader.substring("Bearer ".length());
         username = jwtService.extractUsername(jwtToken);
 
-        log.info("Username from token "+username);
+        //log.info("Username from token "+username);
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
             if (jwtService.validateToken(jwtToken, userDetails)) {
@@ -56,7 +56,7 @@ private final CustomUserDetailsService userDetailsService;
                 authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                 
-                log.info("Done authentication "+username);
+                //log.info("Done authentication "+username);
             }
         }
         filterChain.doFilter(request, response);

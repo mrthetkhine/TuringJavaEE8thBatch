@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.turing.javaee8.webfluxmongo.common.Mapper;
 import com.turing.javaee8.webfluxmongo.dto.MovieDto;
 import com.turing.javaee8.webfluxmongo.model.Movie;
+import com.turing.javaee8.webfluxmongo.model.Review;
 import com.turing.javaee8.webfluxmongo.model.Actor;
 import com.turing.javaee8.webfluxmongo.repository.ActorRepository;
 import com.turing.javaee8.webfluxmongo.repository.MovieRepository;
@@ -15,6 +16,8 @@ import com.turing.javaee8.webfluxmongo.service.MovieService;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.util.function.Tuple2;
+import reactor.util.function.Tuples;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -161,17 +164,31 @@ public class MovieServiceImpl implements MovieService{
 			return containActor;
 		};
 	}
-
+	Tuple2<String,Float> getAverageRating(List<Review> reviews)
+	{
+		float total = 0;
+		for(Review r : reviews)
+		{
+			total += r.getRating();
+		}
+		float average = total/reviews.size();
+		
+		String movieId = reviews.get(0).getMovie().getId();
+		return Tuples.of(movieId,average);
+	}
 	@Override
 	public Flux<MovieDto> getAllMovieWithAverageRatingGt(int averageRating) {
-		
-		return null;
-		/*
 		return this.reviewDao 
-					.findAll()
-					.groupBy(review->{
-						return review.getMovie().getId();
-					});
-		*/
+				.findAll()
+				.groupBy(review->{
+					return review.getMovie().getId();
+				})
+				.flatMap(fluxGroup->fluxGroup.collectList())
+				.map(this::getAverageRating)
+				.filter(tuple->tuple.getT2()>=averageRating )
+				.map(tuple->tuple.getT1())
+				.flatMap(movieId->this.movieDao.findById(movieId))
+				.map(m->this.mapper.map(m, MovieDto.class));
+		
 	}
 }

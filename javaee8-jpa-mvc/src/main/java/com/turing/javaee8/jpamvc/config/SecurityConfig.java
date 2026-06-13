@@ -33,6 +33,7 @@ public class SecurityConfig {
 	        "/api/auth/login",
 	        "/api/auth/hello",
 	        "/api/demo/**",
+	        "/api/dummy/**",
 	        "/api/auth/register" //for the sake of tutorial
 	};
 	@Bean
