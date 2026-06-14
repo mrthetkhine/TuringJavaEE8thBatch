@@ -1,0 +1,806 @@
+{
+  "info": {
+    "_postman_id": "6576419e-2a60-4ad9-afa2-323ae95725c9",
+    "name": "JavaEE8thReactive",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "5339096",
+    "_collection_link": "https://go.postman.co/collection/5339096-6576419e-2a60-4ad9-afa2-323ae95725c9?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwicm9sZXMiOlsiVVNFUiJdLCJpYXQiOjE3ODE0Mzk5OTMsImV4cCI6MTc4MTQ0Mjk5M30.yV1DhN0DML86QHXwjI6sf1XxDU98WkRm9c0qKjTN4Ec",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\":\"user1\",\n    \"email\":\"user@gmail.com\",\n    \"password\":\"user1\",\n    \"roles\":[ {\n        \"role\":\"ROLE_USER\"\n    }]\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\":\"admin\",\n    \"password\":\"admin\"\n \n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "movie",
+      "item": [
+        {
+          "name": "reviews",
+          "item": [
+            {
+              "name": "GetReviews",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIkFETUlOIl0sImlhdCI6MTczNDg3MzE5MSwiZXhwIjoxNzM0ODc2MTkxfQ.xFNwNeGKg0_r1ga09Dmw2QFjn9ecZA_9qw1NWY2oous",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/api/movies/6a2561afdaacb2b0a6f1aaad/reviews",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "movies",
+                    "6a2561afdaacb2b0a6f1aaad",
+                    "reviews"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "SaveReview",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"rating\":5,\n    \"review\":\"dummy review for titanic\"\n\n}"
+                },
+                "url": {
+                  "raw": "{{url}}/api/movies/6a2561afdaacb2b0a6f1aaad/reviews",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "movies",
+                    "6a2561afdaacb2b0a6f1aaad",
+                    "reviews"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "UpdateReview",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n   \n    \"review\": \"good movie five updated for titanic\",\n    \"rating\": 5\n\n}"
+                },
+                "url": {
+                  "raw": "{{url}}/api/movies/6a2561afdaacb2b0a6f1aaad/reviews/6a2818a133a6d88345c5b35",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "movies",
+                    "6a2561afdaacb2b0a6f1aaad",
+                    "reviews",
+                    "6a2818a133a6d88345c5b35"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DeleteReview",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{url}}/api/movies/reviews/6a2820d4c6e7aa63333d8e04",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "movies",
+                    "reviews",
+                    "6a2820d4c6e7aa63333d8e04"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GetReviewById",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{url}}/api/movies/reviews/68a48681f2b5f7b43edb3aa3",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "movies",
+                    "reviews",
+                    "68a48681f2b5f7b43edb3aa3"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "UpdateReviewById",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n        \"id\": \"68a48681f2b5f7b43edb3aa3\",\n        \"movieId\": \"68a4796bddc8cb87043e21de\",\n        \"review\": \"Best triology\",\n        \"rating\": 4\n    }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/api/movies/reviews/68a48681f2b5f7b43edb3aa3",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "movies",
+                    "reviews",
+                    "68a48681f2b5f7b43edb3aa3"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "GetMovies",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIkFETUlOIl0sImlhdCI6MTc1OTA2NDI1NSwiZXhwIjoxNzU5MDY3MjU1fQ.vR5enOgbscL2G7pF9afLWL-DcH245hNPacMOidstl00",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/movies",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "movies"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetMovie",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIkFETUlOIl0sImlhdCI6MTczMTc1ODc1MCwiZXhwIjoxNzMxNzYxNzUwfQ.PeAICCK5slDgh4uxfnvTcivjub9Vg-pCndqCY5XOTWs",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/movies/6a241aaef548637926a0a557",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "movies",
+                "6a241aaef548637926a0a557"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetMovieWithAverageRating",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIkFETUlOIl0sImlhdCI6MTczMTc1ODc1MCwiZXhwIjoxNzMxNzYxNzUwfQ.PeAICCK5slDgh4uxfnvTcivjub9Vg-pCndqCY5XOTWs",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/movies/average_rating?rating=4",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "movies",
+                "average_rating"
+              ],
+              "query": [
+                {
+                  "key": "rating",
+                  "value": "4"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "SaveMovie",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\":\"Forrest Gump\",\n    \"year\":1994,\n    \"director\":\"Robert Zemeckis\",\n    \"details\":{\n        \"details\":\"Drama\"\n    },\n    \"genres\": [\"History\"]\n\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/movies",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "movies"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "UpdateMovie",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": \"6a241aaef548637926a0a557\",\n    \"title\": \"The DARK KNIGHT\",\n    \"year\": 2005,\n    \"director\": \"Christopher Nolan\",\n    \"createdAt\": null,\n    \"details\": {\n        \"id\": null,\n        \"details\": \"Action scence\"\n    },\n    \"genres\": [\n        \"Action\"\n    ],\n    \"actors\": null\n        }"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/movies/6a241aaef548637926a0a558",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "movies",
+                "6a241aaef548637926a0a558"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "SearchMovie",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/movies/actor?actor=Leonardo",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "movies",
+                "actor"
+              ],
+              "query": [
+                {
+                  "key": "actor",
+                  "value": "Leonardo"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DeleteMovie",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/movies/6a241f819d165009da7f7dd9",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "movies",
+                "6a241f819d165009da7f7dd9"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "SearchMovieByDirector",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/movies/name?movieName=Movie 1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "movies",
+                "name"
+              ],
+              "query": [
+                {
+                  "key": "movieName",
+                  "value": "Movie 1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "SearchMovieByActor",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/movies/actors?name=Leonardo",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "movies",
+                "actors"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "Leonardo"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetDirectorWithAverageRatingGt",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/movies/directors/4",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "movies",
+                "directors",
+                "4"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "CosumeRest",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/consume",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "consume"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "AssignActor",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/movies/6a256205daacb2b0a6f1aaae/assignment/actors/6a1c3a1024ff462a99abb26b",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "movies",
+                "6a256205daacb2b0a6f1aaae",
+                "assignment",
+                "actors",
+                "6a1c3a1024ff462a99abb26b"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Actor",
+      "item": [
+        {
+          "name": "GetAllActors",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIkFETUlOIl0sImlhdCI6MTc1ODYzNzg1MiwiZXhwIjoxNzU4NjQwODUyfQ.2arxaaiSM70Epwm92WtU6W2lMKBjkQylY2FecnkN4VQ",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{url}}/api/actors",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "actors"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetActorById",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/actors/6a1c38fa5fc7f56a6e9eb282",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "actors",
+                "6a1c38fa5fc7f56a6e9eb282"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "SaveActor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"firstName\": \"Christian\",\n    \"lastName\": \"Bale\",\n    \"gender\":\"Male\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/actors",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "actors"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "UpdateActor",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"firstName\": \"Nickole\",\n    \"lastName\": \"Kidman\",\n    \"gender\":\"Female\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/actors/6a1c3a40c2a8c903402e0c34",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "actors",
+                "6a1c3a40c2a8c903402e0c34"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DeleteActor",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/actors/6a24240c60886c0c1bc2ae3a",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "actors",
+                "6a24240c60886c0c1bc2ae3a"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "DummyAuth",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"john@mail.com\",\n    \"password\": \"changeme\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.escuelajs.co/api/v1/auth/login",
+              "protocol": "https",
+              "host": [
+                "api",
+                "escuelajs",
+                "co"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetProfile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJlbWlseXMiLCJlbWFpbCI6ImVtaWx5LmpvaG5zb25AeC5kdW1teWpzb24uY29tIiwiZmlyc3ROYW1lIjoiRW1pbHkiLCJsYXN0TmFtZSI6IkpvaG5zb24iLCJnZW5kZXIiOiJmZW1hbGUiLCJpbWFnZSI6Imh0dHBzOi8vZHVtbXlqc29uLmNvbS9pY29uL2VtaWx5cy8xMjgiLCJpYXQiOjE3ODEzNTI5MjMsImV4cCI6MTc4MTM1NjUyM30.LbMRGWnktg5DJqxJSPVS9aNwAyVvhtcywNt69DwQSrg",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://dummyjson.com/auth/me",
+              "protocol": "https",
+              "host": [
+                "dummyjson",
+                "com"
+              ],
+              "path": [
+                "auth",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
