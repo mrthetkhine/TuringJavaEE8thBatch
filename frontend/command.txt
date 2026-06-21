@@ -1,0 +1,9 @@
+ng g c components/HelloWorld
+ng g c components/Greet
+ng g i models/Todo --type=model
+ng g c components/TodoUI
+ng g c components/Counter
+ng g c components/GreetTwo
+ng g c components/ListItems
+ng g c components/TodoListUI
+ng g c components/TodoListDemo

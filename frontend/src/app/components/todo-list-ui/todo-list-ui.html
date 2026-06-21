@@ -1,0 +1,5 @@
+<div>
+  @for (todo of todos(); track $index) {
+    <app-todo-ui [todo]="todo" (onDeleteTodo)="deleteTodo($event)"/>
+  }
+</div>
