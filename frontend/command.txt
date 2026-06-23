@@ -7,3 +7,11 @@ ng g c components/GreetTwo
 ng g c components/ListItems
 ng g c components/TodoListUI
 ng g c components/TodoListDemo
+ng g c components/ChildOutput
+ng g c components/ParentListener
+ng g c components/Bordered
+ng g c components/Layout
+ng g c components/view-child/ViewChildDemo
+ng g c components/view-child/TabDemo
+ng g c components/view-child/Tab
+ng g c components/view-child/TabPage

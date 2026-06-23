@@ -10,18 +10,5 @@ import { TodoListUI } from '../todo-list-ui/todo-list-ui';
   styleUrl: './todo-list-demo.css',
 })
 export class TodoListDemo {
-  todos: Todo[] = [
-    {
-      id: 1,
-      title: 'Task 1',
-    },
-    {
-      id: 2,
-      title: 'Task 2',
-    },
-    {
-      id: 1,
-      title: 'Task 3',
-    },
-  ];
+
 }

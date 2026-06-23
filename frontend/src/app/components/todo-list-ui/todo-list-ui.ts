@@ -9,9 +9,23 @@ import { TodoUI } from '../todo-ui/todo-ui';
   styleUrl: './todo-list-ui.css',
 })
 export class TodoListUI {
-  todos = input.required<Todo[]>();
+  todos: Todo[] = [
+    {
+      id: 1,
+      title: 'Task 1',
+    },
+    {
+      id: 2,
+      title: 'Task 2',
+    },
+    {
+      id: 3,
+      title: 'Task 3',
+    },
+  ];
 
   deleteTodo(todo:Todo) {
     console.log('Delete todo in parent ',todo);
+    this.todos = this.todos.filter(td=>td.id!== todo.id);
   }
 }

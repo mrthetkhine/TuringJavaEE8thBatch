@@ -16,4 +16,8 @@ export class TodoUI {
     console.log('delete todo child',this.todo());
     this.onDeleteTodo.emit(this.todo());
   }
+  ngOnDestroy()
+  {
+    console.log('ngOnDestroy ',this.todo());
+  }
 }

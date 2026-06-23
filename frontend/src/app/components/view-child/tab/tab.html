@@ -1,0 +1,8 @@
+<div>
+  @for (header of headers(); track $index) {
+    <div class="tab-header" (click)="clickHeader($index)">
+      {{header}}
+    </div>
+  }
+  <ng-content/>
+</div>
