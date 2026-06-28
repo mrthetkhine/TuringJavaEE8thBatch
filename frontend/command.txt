@@ -15,3 +15,11 @@ ng g c components/view-child/ViewChildDemo
 ng g c components/view-child/TabDemo
 ng g c components/view-child/Tab
 ng g c components/view-child/TabPage
+ng g c components/DomApiDemo
+ng g c components/outletdemo/Dashboard
+ng g c components/template/Binding
+ng g c components/template/TwoWayBinding
+ng g c components/template/StandAloneCounter
+ng g c components/template/TrackDemo
+ng g c components/template/SwitchDemo
+ng g c components/template/PipeDemo

@@ -1,0 +1,13 @@
+<div>
+  <h2>Hello {{ firstName }}!</h2>
+
+  @if (firstName.length > 3; as length) {
+    <p>{{ firstName}}length  is greater than {{ 3 }}</p>
+    <h1> {{length}}</h1>
+  } @else {
+    <p>{{ firstName}}length  is equal or less than {{ 3 }}</p>
+  }
+
+  <input type="text" [(ngModel)]="firstName" />
+  <button type="button" (click)="update()">Update</button>
+</div>

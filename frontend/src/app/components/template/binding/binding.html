@@ -1,0 +1,22 @@
+<div >
+  Binding {{theme}}
+  <br/>
+  Value {{value()}}
+  <div [attr.role]="role"
+       [class.background]="background" >
+    Role
+  </div>
+  <div [style.display]="mode">
+    First
+  </div>
+  <div [style.display]="mode">
+    Second
+  </div>
+  <div [class]="container()"
+       (click)="onClick($event)"
+       (contextmenu)="onRightClick($event)">
+      Container
+  </div>
+  <app-hello-world/>
+  <button type="button" (click)="toggle()">Toggle</button>
+</div>

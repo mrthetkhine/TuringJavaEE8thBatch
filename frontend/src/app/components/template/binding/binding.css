@@ -1,0 +1,12 @@
+.background {
+  background-color: lightgray;
+}
+.container{
+  border: 1px solid lightgray;
+  width:200px;
+  height: 100px;
+}
+.active
+{
+  background-color: lightgray;
+}

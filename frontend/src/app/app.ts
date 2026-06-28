@@ -15,6 +15,13 @@ import { Body } from './components/body/body';
 import { Header } from './components/header/header';
 import { ViewChildDemo } from './components/view-child/view-child-demo/view-child-demo';
 import { TabDemo } from './components/view-child/tab-demo/tab-demo';
+import { DomApiDemo } from './components/dom-api-demo/dom-api-demo';
+import { Dashboard } from './components/outletdemo/dashboard/dashboard';
+import { Binding } from './components/template/binding/binding';
+import { TwoWayBinding } from './components/template/two-way-binding/two-way-binding';
+import { TrackDemo } from './components/template/track-demo/track-demo';
+import { SwitchDemo } from './components/template/switch-demo/switch-demo';
+import { PipeDemo } from './components/template/pipe-demo/pipe-demo';
 
 @Component({
   selector: 'app-root',
@@ -34,6 +41,13 @@ import { TabDemo } from './components/view-child/tab-demo/tab-demo';
     Body,
     ViewChildDemo,
     TabDemo,
+    DomApiDemo,
+    Dashboard,
+    Binding,
+    TwoWayBinding,
+    TrackDemo,
+    SwitchDemo,
+    PipeDemo,
   ],
   templateUrl: './app.html',
   styleUrl: './app.css',
@@ -43,6 +57,7 @@ export class App {
   message1 = 'Hello World!';
 
   counter = 10;
+  hello = 'This is field hello inside app';
   todo: Todo = {
     title: 'Todo 1',
     completed: true,

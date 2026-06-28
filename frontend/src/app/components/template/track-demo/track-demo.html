@@ -1,0 +1,12 @@
+<div>
+    @for(item of items;track item;let index = $index) {
+      <div>
+        index {{$index}}
+        <app-stand-alone-counter [label]="item"></app-stand-alone-counter>
+      </div>
+
+    } @empty {
+      <div>Nothing</div>
+    }
+  <button type="button" (click)="reverse()">Reverse</button>
+</div>

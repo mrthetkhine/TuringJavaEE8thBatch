@@ -6,4 +6,8 @@ import { Component } from '@angular/core';
   templateUrl: './hello-world.html',
   styleUrl: './hello-world.css',
 })
-export class HelloWorld {}
+export class HelloWorld {
+  ngDoCheck() {
+    console.log('ngDoCheck  HelloWorld');
+  }
+}
