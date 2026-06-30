@@ -22,6 +22,10 @@ import { TwoWayBinding } from './components/template/two-way-binding/two-way-bin
 import { TrackDemo } from './components/template/track-demo/track-demo';
 import { SwitchDemo } from './components/template/switch-demo/switch-demo';
 import { PipeDemo } from './components/template/pipe-demo/pipe-demo';
+import { TemplateFragmentDemo } from './components/template/template-fragment-demo/template-fragment-demo';
+import { Variable } from './components/template/variable/variable';
+import { DeferDemo } from './components/template/defer-demo/defer-demo';
+import { TodoListWithApi } from './components/todo-list-with-api/todo-list-with-api';
 
 @Component({
   selector: 'app-root',
@@ -48,6 +52,10 @@ import { PipeDemo } from './components/template/pipe-demo/pipe-demo';
     TrackDemo,
     SwitchDemo,
     PipeDemo,
+    TemplateFragmentDemo,
+    Variable,
+    DeferDemo,
+    TodoListWithApi,
   ],
   templateUrl: './app.html',
   styleUrl: './app.css',

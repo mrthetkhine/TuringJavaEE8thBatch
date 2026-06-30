@@ -23,3 +23,11 @@ ng g c components/template/StandAloneCounter
 ng g c components/template/TrackDemo
 ng g c components/template/SwitchDemo
 ng g c components/template/PipeDemo
+ng generate pipe pipes/BigCase
+ng g c components/template/TemplateFragmentDemo
+ng g c components/template/LargeComponent
+ng g c components/template/DeferDemo
+ng generate directive directives/RedColor
+ng generate service services/Logging
+ng generate service services/TodoService
+ng g c components/TodoListWithApi

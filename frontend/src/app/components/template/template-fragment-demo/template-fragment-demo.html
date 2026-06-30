@@ -1,0 +1,23 @@
+<div>
+  <p>This is a normal element</p>
+  <ng-template #myFragment>
+    <p>This is a template fragment</p>
+  </ng-template>
+  <ng-container *ngTemplateOutlet="myFragment"></ng-container>
+  <h1>Container</h1>
+  <section>
+    <ng-container>
+      <h3>User bio</h3>
+      <p>Here's some info about the user</p>
+    </ng-container>
+  </section>
+  <ng-container [ngComponentOutlet]="profileComponent()" />
+  <ng-container [ngTemplateOutlet]="profileTemplate()" />
+  <ng-template #admin>This is the admin profile</ng-template>
+  <ng-template #basic>This is the basic profile</ng-template>
+
+  <div *ngFor="let item of items; index as i;">
+    <h2>{{ item.title }}</h2>
+    <p>{{ item.description }}</p>
+  </div>
+</div>

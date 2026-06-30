@@ -1,0 +1,15 @@
+<div appRedColor>
+  {{1+2}}
+  <h1 ngPreserveWhitespaces>Hello &nbsp; &nbsp; &nbsp; &nbsp;   World</h1>
+  <p>Hello &nbsp; &nbsp; &nbsp; &nbsp; world</p>
+  <h2>Some content that will always be displayed ...</h2>
+
+  @defer (on timer(1000ms)) {
+    <app-large-component/>
+  }
+  @placeholder {
+    <div>Large component placeholder</div>
+  }
+  <h3>Another</h3>
+  <button type="button" (click)="log()">Log</button>
+</div>
