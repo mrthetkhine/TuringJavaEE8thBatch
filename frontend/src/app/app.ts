@@ -1,5 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { HelloWorld } from './components/hello-world/hello-world';
 import { Greet } from './components/greet/greet';
 import { Todo } from './models/todo.model';
@@ -31,6 +32,7 @@ import { TodoListWithApi } from './components/todo-list-with-api/todo-list-with-
   selector: 'app-root',
   imports: [
     RouterOutlet,
+    RouterLink,
     HelloWorld,
     Greet,
     TodoUI,

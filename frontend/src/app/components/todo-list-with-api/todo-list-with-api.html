@@ -1,6 +1,6 @@
 <div>
   <h1>Todo list</h1>
-  @for (todo of todos; track $index) {
+  @for (todo of todos; track todo.id) {
     <app-todo-ui [todo]="todo" (onDeleteTodo)="deleteTodo($event)"/>
   }
 </div>

@@ -17,6 +17,7 @@ export class TodoListWithApi {
     console.log('TodoListWithApi ngOnInit');
     this.todoService.loadAllTodo()
                     .subscribe(todos => {
+                      console.log('load all todo subscribe ',todos);
                       this.todos = todos;
                     });
   }

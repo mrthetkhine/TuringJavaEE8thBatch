@@ -31,3 +31,7 @@ ng generate directive directives/RedColor
 ng generate service services/Logging
 ng generate service services/TodoService
 ng g c components/TodoListWithApi
+ng g i models/Movie --type=model
+ng g c components/pages/Login
+ng generate guard guards/AuthGuard
+ng g c components/forms/TemplateDrivenFormDemo
