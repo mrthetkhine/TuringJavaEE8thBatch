@@ -13,17 +13,20 @@ export class MoviesList {
     {
       id: 1,
       title:'Titanic',
-      year: 1995
+      year: 1995,
+      genres:[],
     },
     {
       id: 2,
       title:'The Dark Knight',
-      year: 1995
+      year: 1995,
+      genres:[],
     },
     {
       id: 3,
       title:'X Men',
-      year: 2001
+      year: 2001,
+      genres:[],
     }
   ]
   private router = inject(Router);

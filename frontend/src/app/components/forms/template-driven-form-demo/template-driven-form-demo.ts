@@ -14,7 +14,8 @@ export class TemplateDrivenFormDemo {
   movie:Movie = {
     id:1,
     title:'',
-    year:0
+    year:0,
+    genres:[],
   }
   onSubmit() {
     console.log('movie ',this.movie);

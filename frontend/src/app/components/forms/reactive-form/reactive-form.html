@@ -1,0 +1,71 @@
+<form [formGroup]="movieForm" (ngSubmit)="onSubmit()">
+  <!--<div>
+    Title is {{title.value}}
+  </div>-->
+  <div>
+    <p>Form Status: {{ movieForm.status }}</p>
+  </div>
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" class="form-control"
+           id="title"
+           formControlName="title"
+    >
+    @if (title?.invalid && (title?.dirty || title?.touched)) {
+      <div class="alert alert-danger">
+        @if (title?.hasError('required')) {
+          <div>Title is required.</div>
+        }
+        @if (title?.hasError('upperCase')) {
+          <div>Title must be start with upperCase.</div>
+        }
+        @if (title?.hasError('minlength')) {
+          <div>Title must be at least 4 characters long.</div>
+        }
+
+
+      </div>
+    }
+
+  </div>
+  <div class="form-group">
+    <label for="year">Year</label>
+    <input type="text"
+           class="form-control"
+           formControlName="year"
+          >
+    @if (year?.invalid && (year?.dirty || year?.touched)) {
+      <div class="alert alert-danger">
+        @if (year?.hasError('required')) {
+          <div>Year is required.</div>
+        }
+
+
+      </div>
+    }
+  </div>
+  <div formArrayName="genres">
+    <button type="button" (click)="addGenre()" class="btn btn-primary">+ Add Genre</button>
+    @for (genre of genres.controls; track genre; let i = $index) {
+      <div class="container row">
+        <!-- The repeated alias template -->
+        <label for="genre-{{ i }}" class="col-sm-2">Genre:</label>
+        <div class="col-sm-3">
+          <input type="text"
+                 class="form-control"
+                 [formControlName]="i"
+          >
+
+        </div>
+        <button type="button" (click)="removeGenre(i)" class="btn btn-primary col-2">Remove</button>
+
+      </div>
+    }
+  </div>
+  <div>
+    <button type="submit" class="btn btn-primary"
+            [disabled]="!movieForm.valid" >Submit</button>
+    <button type="button" class="btn btn-primary" (click)="updateTitle()">Update</button>
+
+  </div>
+</form>

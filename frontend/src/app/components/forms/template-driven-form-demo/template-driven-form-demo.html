@@ -7,10 +7,20 @@
            required
            [(ngModel)]="movie.title"
            name="title"
+           minlength="4"
            #title="ngModel">
-    <div [hidden]="title.valid || title.pristine" class="alert alert-danger">
-      Title is required
-    </div>
+    @if (title.invalid && (title.dirty || title.touched)) {
+      <div class="alert alert-danger">
+        @if (title.hasError('required')) {
+          <div>Title is required.</div>
+        }
+        @if (title.hasError('minlength')) {
+          <div>Title must be at least 4 characters long.</div>
+        }
+
+      </div>
+    }
+
   </div>
   <div class="form-group">
     <label for="year">Year</label>

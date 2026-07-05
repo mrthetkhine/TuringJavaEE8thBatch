@@ -35,3 +35,5 @@ ng g i models/Movie --type=model
 ng g c components/pages/Login
 ng generate guard guards/AuthGuard
 ng g c components/forms/TemplateDrivenFormDemo
+ng g c components/forms/ReactiveForm
+ng g c components/forms/SignalFormDemo
