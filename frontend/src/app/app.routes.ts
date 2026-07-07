@@ -6,6 +6,8 @@ import { MoviesDetails } from './components/pages/movies-details/movies-details'
 import { NotFound } from './components/pages/not-found/not-found';
 import { Login } from './components/pages/login/login';
 import { authGuardGuard } from './guards/auth-guard-guard';
+import { ActorList } from './components/pages/actor-list/actor-list';
+import { ActorCount } from './components/pages/actor-count/actor-count';
 
 export const routes: Routes = [
   {
@@ -28,8 +30,12 @@ export const routes: Routes = [
     canActivate: [authGuardGuard],
   },
   {
-    path: 'details',
-    redirectTo: '/movies',
+    path: 'actors',
+    component: ActorList,
+  },
+  {
+    path: 'actors-count',
+    component: ActorCount,
   },
   {
     path: 'login',

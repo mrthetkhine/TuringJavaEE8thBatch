@@ -37,3 +37,9 @@ ng generate guard guards/AuthGuard
 ng g c components/forms/TemplateDrivenFormDemo
 ng g c components/forms/ReactiveForm
 ng g c components/forms/SignalFormDemo
+ng g i models/Actor --type=model
+ng generate service services/ActorService
+ng g i models/ApiResponse --type=model
+ng g c components/pages/ActorList
+ng g c components/pages/ActorCount
+ng g c components/pages/NewActorForm

@@ -1,0 +1,84 @@
+<button type="button" class="btn btn-primary" (click)="open(content)">
+  New Movie
+</button>
+<ng-template #content let-c="close" let-d="dismiss">
+  <form  [formRoot]="actorForm" (ngSubmit)="onSubmit()">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">New Actor</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+
+
+      <div class="form-group">
+        <label for="title">FirstName</label>
+        <input type="text"
+               class="form-control"
+               id="title"
+               [formField]="actorForm.firstName"
+        >
+        @if (actorForm.firstName().touched() &&  actorForm.firstName().invalid()) {
+          <div class="alert alert-danger">
+            <ul>
+              @for (error of actorForm.firstName().errors(); track error) {
+                <li>{{ error.message }}</li>
+              }
+            </ul>
+          </div>
+
+
+        }
+
+      </div>
+      <div class="form-group">
+        <label for="lastName">LastName</label>
+        <input type="text"
+               class="form-control"
+               id="lastName"
+               [formField]="actorForm.lastName"
+        >
+        @if (actorForm.lastName().touched() &&  actorForm.lastName().invalid()) {
+          <div class="alert alert-danger">
+            <ul>
+              @for (error of actorForm.lastName().errors(); track error) {
+                <li>{{ error.message }}</li>
+              }
+            </ul>
+          </div>
+
+
+        }
+
+      </div>
+
+      <div class="form-group">
+        <label for="gender">Gender</label>
+        <input type="text"
+               class="form-control"
+               id="gender"
+               [formField]="actorForm.gender"
+        >
+        @if (actorForm.gender().touched() &&  actorForm.gender().invalid()) {
+          <div class="alert alert-danger">
+            <ul>
+              @for (error of actorForm.gender().errors(); track error) {
+                <li>{{ error.message }}</li>
+              }
+            </ul>
+          </div>
+
+
+        }
+
+      </div>
+
+
+    </div>
+    <div class="modal-footer">
+
+      <button type="submit" class="btn btn-primary"
+              [disabled]="!actorForm().valid()">Save</button>
+      <!--<button type="button" class="btn btn-primary" (click)="update()">Update</button>-->
+    </div>
+  </form>
+</ng-template>
