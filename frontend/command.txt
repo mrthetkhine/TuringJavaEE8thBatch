@@ -43,3 +43,6 @@ ng g i models/ApiResponse --type=model
 ng g c components/pages/ActorList
 ng g c components/pages/ActorCount
 ng g c components/pages/NewActorForm
+ng g c components/common/ConfirmDialog
+ng g i models/AuthUser --type=model
+ng g i models/AuthResponse --type=model

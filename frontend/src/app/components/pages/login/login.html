@@ -1,4 +1,49 @@
-<div>
-  <h3>login</h3>
-  <button type="button" class="btn btn-primary" (click)="login()">Login</button>
-</div>
+<form  [formRoot]="loginForm" (ngSubmit)="onSubmit()" >
+
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text"
+             class="form-control"
+             id="username"
+             [formField]="loginForm.username"
+      >
+      @if (loginForm.username().touched() &&  loginForm.username().invalid()) {
+        <div class="alert alert-danger">
+          <ul>
+            @for (error of loginForm.username().errors(); track error) {
+              <li>{{ error.message }}</li>
+            }
+          </ul>
+        </div>
+
+
+      }
+
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password"
+             class="form-control"
+             id="password"
+             [formField]="loginForm.password"
+      >
+      @if (loginForm.password().touched() &&  loginForm.password().invalid()) {
+        <div class="alert alert-danger">
+          <ul>
+            @for (error of loginForm.password().errors(); track error) {
+              <li>{{ error.message }}</li>
+            }
+          </ul>
+        </div>
+
+
+      }
+
+    </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary"
+            [disabled]="!loginForm().valid()">Login</button>
+  </div>
+
+
+</form>

@@ -1,10 +1,12 @@
-<button type="button" class="btn btn-primary" (click)="open(content)">
-  New Movie
-</button>
+<!--<button type="button" class="btn btn-primary" (click)="openNewActorDialog()">
+  New Actor
+</button>-->
 <ng-template #content let-c="close" let-d="dismiss">
   <form  [formRoot]="actorForm" (ngSubmit)="onSubmit()">
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">New Actor</h4>
+      <h4 class="modal-title" id="modal-basic-title">
+        {{editMode?'Edit Actor':'New Actor'}}
+      </h4>
       <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
     </div>
     <div class="modal-body">
@@ -77,7 +79,9 @@
     <div class="modal-footer">
 
       <button type="submit" class="btn btn-primary"
-              [disabled]="!actorForm().valid()">Save</button>
+              [disabled]="!actorForm().valid()">
+        {{editMode?'Update':'Save'}}
+      </button>
       <!--<button type="button" class="btn btn-primary" (click)="update()">Update</button>-->
     </div>
   </form>

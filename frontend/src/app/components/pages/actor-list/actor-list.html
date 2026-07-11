@@ -1,6 +1,12 @@
+<button type="button" class="btn btn-primary" (click)="showNewActorDialog()">
+  New Actor
+</button>
 <div>
-  <app-actor-count/>
+  <!--<app-actor-count/>-->
   <app-new-actor-form/>
+  <app-confirm-dialog>
+      <h3>Are you sure you want to delete this movie</h3>
+  </app-confirm-dialog>
   <h1>Actor List</h1>
   <table class="table table-striped">
     <thead>
@@ -8,6 +14,7 @@
         <th>First Name</th>
         <th>Last Name</th>
         <th>Gender</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -21,6 +28,14 @@
           </td>
           <td>
             {{actor.gender}}
+          </td>
+          <td>
+           <button type="button" class="btn btn-primary" (click)="showDeleteConfirm(actor)">
+             Delete
+           </button>
+            <button type="button" class="btn btn-primary" (click)="showUpdateActorForm(actor)">
+              Edit
+            </button>
           </td>
         </tr>
       }

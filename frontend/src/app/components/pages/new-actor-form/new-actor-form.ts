@@ -1,4 +1,4 @@
-import { Component, signal, inject, TemplateRef } from '@angular/core';
+import { Component, signal, inject, TemplateRef, input, contentChild, viewChild } from '@angular/core';
 import {
   form,
   FormField,
@@ -18,6 +18,7 @@ import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal';
 import { ActorService } from '../../../services/actor-service';
 
 
+
 @Component({
   selector: 'app-new-actor-form',
   imports: [FormField, ReactiveFormsModule, FormRoot, FormsModule],
@@ -25,7 +26,11 @@ import { ActorService } from '../../../services/actor-service';
   styleUrl: './new-actor-form.css',
 })
 export class NewActorForm {
+  private readonly modalService = inject(NgbModal);
+  dialogContent = viewChild<TemplateRef<any>>('content');
   actorService = inject(ActorService);
+  editMode = false;
+
   actorModel = signal<Actor>({
     id: '0',
     firstName: '',
@@ -37,24 +42,60 @@ export class NewActorForm {
     required(schemaPath.lastName, { message: 'LastName is required' });
     required(schemaPath.gender, { message: 'Gender is required' });
   });
-  private readonly modalService = inject(NgbModal);
+
   readonly closeResult = signal('');
 
-  modalRef?:NgbModalRef ;
+  modalRef?: NgbModalRef;
 
-  open(content: TemplateRef<any>) {
-    this.modalRef = this.modalService.open(content, {
+  openNewActorDialog()
+  {
+    this.editMode = false;
+    this.actorForm().reset();
+    this.actorModel.set({
+      id:undefined,
+      firstName:'',
+      lastName:'',
+      gender:'',
+    });
+    this.modalRef = this.modalService.open(this.dialogContent(), {
       ariaLabelledBy: 'modal-basic-title',
       size: 'lg'
     });
+  }
+  openEditActorDialog(actor: Actor)
+  {
+    console.log('actor to edit ',actor);
+    this.editMode = true;
 
+    this.actorModel.set({
+      id:actor?.id,
+      firstName:actor.firstName,
+      lastName:actor.lastName,
+      gender:actor.gender,
+    });
+
+    this.modalRef = this.modalService.open(this.dialogContent(), {
+      ariaLabelledBy: 'modal-basic-title',
+      size: 'lg'
+    });
   }
 
   onSubmit() {
     const formData = this.actorModel();
     console.log('Form Data: ', formData);
-    // Send to server
-    this.actorService.saveActor(formData);
-    this.modalRef?.close();
+    if(this.editMode)
+    {
+      console.log('edit actor ',formData);
+      this.actorService.apiUpdateActor(formData);
+      this.modalRef?.close();
+    }
+    else
+    {
+
+      // Send to server
+      this.actorService.apiSaveActor(formData);
+      this.modalRef?.close();
+    }
+
   }
 }

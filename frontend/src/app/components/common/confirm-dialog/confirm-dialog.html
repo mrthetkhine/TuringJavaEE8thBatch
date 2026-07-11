@@ -1,0 +1,21 @@
+<ng-template #content let-c="close" let-d="dismiss">
+  <form >
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">
+        {{dialogTitle}}
+      </h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+
+      <ng-content/>
+
+    </div>
+    <div class="modal-footer">
+
+      <button type="submit" class="btn btn-primary" (click)="confirmClick()">Ok</button>
+      <button type="submit" class="btn btn-primary" (click)="closeDialog()">Cancel</button>
+      <!--<button type="button" class="btn btn-primary" (click)="update()">Update</button>-->
+    </div>
+  </form>
+</ng-template>
