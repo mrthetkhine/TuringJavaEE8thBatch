@@ -1,0 +1,32 @@
+src/app/
+│
+├── core/
+│   ├── auth/               # Identity & access sub-domain
+│   │   ├── auth.guard.ts   # Route protection
+│   │   └── auth.service.ts # Handle JWT tokens, login/logout mechanisms
+│   ├── interceptors/       # HTTP hooks (e.g., passing authorization headers)
+│   ├── services/           # Truly global singletons (ThemeService, NotificationService)
+│   └── utils/              # Pure TypeScript utility functions
+│
+├── shared/
+│   ├── components/         # Pure, stateless UI controls
+│   │   ├── button/         # Micro-components
+│   │   └── data-table/     # Complex UI components with NO business knowledge
+│   ├── directives/         # Custom UX attributes (e.g., DebounceClickDirective)
+│   ├── pipes/              # Pure data formatting (e.g., CustomCurrencyPipe)
+│   └── models/             # App-wide global interfaces
+│
+└── features/
+    ├── dashboard/          # Feature Subdomain A
+    └── products/           # Feature Subdomain B (Example Detail below)
+        ├── components/     # UI building blocks used EXCLUSIVELY inside this feature
+        │   ├── product-card/
+        │   └── product-filter/
+        ├── pages/          # Full-routed container screens (lazy-loaded targets)
+        │   ├── product-list/
+        │   └── product-detail/
+        ├── services/       # Domain business logic & API fetch layer
+        │   └── product.service.ts
+        ├── models/         # Interfaces matching API data structures specific to products
+        │   └── product.model.ts
+        └── products.routes.ts # Feature-level nested routing definitions

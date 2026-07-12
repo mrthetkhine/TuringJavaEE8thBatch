@@ -1,0 +1,2 @@
+ng g i shared/models/AuthUser --type=model
+

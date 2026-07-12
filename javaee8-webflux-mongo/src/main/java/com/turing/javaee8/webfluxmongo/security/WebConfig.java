@@ -50,6 +50,7 @@ public class WebConfig {
 							exchanges
 							.pathMatchers(HttpMethod.POST, "/api/login")
 							.permitAll()
+							/*
 							.pathMatchers(HttpMethod.GET, "/api/actors/**")
 							.permitAll()
 							.pathMatchers(HttpMethod.POST, "/api/actors/**")
@@ -57,7 +58,8 @@ public class WebConfig {
 							.pathMatchers(HttpMethod.PUT, "/api/actors/**")
 							.permitAll()	
 							.pathMatchers(HttpMethod.DELETE, "/api/actors/**")
-							.permitAll()		
+							.permitAll()	
+							*/	
 								/*
 								 * .pathMatchers(HttpMethod.GET, "/api/movies/**")
 								.permitAll()

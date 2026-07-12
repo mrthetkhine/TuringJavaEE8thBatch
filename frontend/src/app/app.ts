@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { RouterLink } from '@angular/router';
 import { HelloWorld } from './components/hello-world/hello-world';
@@ -27,6 +27,7 @@ import { TemplateFragmentDemo } from './components/template/template-fragment-de
 import { Variable } from './components/template/variable/variable';
 import { DeferDemo } from './components/template/defer-demo/defer-demo';
 import { TodoListWithApi } from './components/todo-list-with-api/todo-list-with-api';
+import { AuthService } from './services/auth-service';
 
 @Component({
   selector: 'app-root',
@@ -63,6 +64,7 @@ import { TodoListWithApi } from './components/todo-list-with-api/todo-list-with-
   styleUrl: './app.css',
 })
 export class App {
+  authService = inject(AuthService);
   protected readonly title = signal('frontend');
   message1 = 'Hello World!';
 
@@ -72,6 +74,16 @@ export class App {
     title: 'Todo 1',
     completed: true,
   };
+  ngOnInit()
+  {
+    console.log('App ngOnInit');
+    let token = localStorage.getItem('token');
+    console.log('Auth token ',token);
+    if(token)
+    {
+      this.authService.restoreLogin(token);
+    }
+  }
   increment() {
     this.counter++;
   }

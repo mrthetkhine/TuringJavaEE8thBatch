@@ -8,6 +8,7 @@ import { Login } from './components/pages/login/login';
 import { authGuardGuard } from './guards/auth-guard-guard';
 import { ActorList } from './components/pages/actor-list/actor-list';
 import { ActorCount } from './components/pages/actor-count/actor-count';
+import { Logout } from './components/pages/logout/logout';
 
 export const routes: Routes = [
   {
@@ -32,6 +33,7 @@ export const routes: Routes = [
   {
     path: 'actors',
     component: ActorList,
+    canActivate: [authGuardGuard],
   },
   {
     path: 'actors-count',
@@ -40,6 +42,11 @@ export const routes: Routes = [
   {
     path: 'login',
     component: Login
+  },
+  {
+    path: 'logout',
+    canActivate: [authGuardGuard],
+    component: Logout
   },
   {
     path: '**',

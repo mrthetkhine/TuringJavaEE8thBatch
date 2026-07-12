@@ -5,6 +5,7 @@ import { ApiResponse } from '../models/api-response.model';
 import { Actor } from '../models/actor.model';
 import { AuthResponse } from '../models/auth-response.model';
 const BASE_URL = 'http://localhost:8080/api';
+
 @Service()
 export class AuthService {
   private http = inject(HttpClient);
@@ -15,7 +16,20 @@ export class AuthService {
   {
     return this.isLoggedIn;
   }
-  login(authUser:AuthUser,successCallback:()=>void)
+  restoreLogin(token:string)
+  {
+    this.authUser = {
+      token: token,
+    }
+    this.isLoggedIn = true;
+  }
+  logout()
+  {
+    this.authUser = undefined;
+    this.isLoggedIn = false;
+    localStorage.removeItem('token');
+  }
+  login(authUser:AuthUser,successCallback:()=>void,failCallback:()=>void)
   {
     this.http.post<ApiResponse<AuthResponse>>(BASE_URL+'/login',JSON.stringify(authUser),
       {headers: { 'Content-Type': 'application/json' }})
@@ -26,14 +40,22 @@ export class AuthService {
           this.authUser =response.data;
           this.isLoggedIn = true;
           console.log('token successfull');
+          localStorage.setItem('token', response.data.token);
           successCallback();
         }
         else {
           this.authUser = undefined;
           this.isLoggedIn = false;
+          failCallback();
 
         }
 
+      },error=>{
+        console.log('Error Login Response ', error);
+        this.authUser = undefined;
+        this.isLoggedIn = false;
+        localStorage.removeItem('token');
+        failCallback();
       });
   }
 }

@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 
 import { AuthService } from '../../../services/auth-service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Actor } from '../../../models/actor.model';
 import { form, FormField, FormRoot, required } from '@angular/forms/signals';
 import { AuthUser } from '../../../models/auth-user.model';
@@ -25,8 +25,19 @@ export class Login {
     required(schemaPath.password, { message: 'Password is required' });
 
   });
-  loginService = inject(AuthService);
+  authService = inject(AuthService);
   router = inject(Router);
+  private route = inject(ActivatedRoute);
+  redirectUrl:string |null = null;
+
+  ngOnInit() {
+
+    this.route.queryParamMap.subscribe(params => {
+      this.redirectUrl = params.get('redirectUrl');
+      console.log('redirectUrl ',this.redirectUrl);
+    });
+  }
+
   login() {
     //this.loginService.login();
     this.router.navigateByUrl('/');
@@ -35,9 +46,18 @@ export class Login {
     let authUser = this.loginModel();
     console.log('formData ', authUser);
 
-    this.loginService.login(authUser,()=>{
+    this.authService.login(authUser,()=>{
       console.log('Successfully logged in');
-      this.router.navigateByUrl('/');
+      if(this.redirectUrl)
+      {
+        this.router.navigateByUrl(this.redirectUrl);
+      }
+      else {
+        this.router.navigateByUrl('/');
+      }
+
+    },()=>{
+      alert('Invalid username or password');
     });
   }
 }
