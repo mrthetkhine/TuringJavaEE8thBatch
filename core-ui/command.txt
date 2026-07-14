@@ -1,2 +1,5 @@
 ng g i shared/models/AuthUser --type=model
-
+ng g i shared/models/ApiResponse --type=model
+ng g c views/pages/MoviePage
+ng g i shared/models/Movie --type=model
+ng g service features/movie/services/Movie

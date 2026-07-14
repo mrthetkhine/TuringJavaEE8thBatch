@@ -20,7 +20,24 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  imports: [ContainerComponent, RowComponent, ColComponent, CardGroupComponent, CardComponent, CardBodyComponent, FormDirective, InputGroupComponent, InputGroupTextDirective, IconDirective, FormControlDirective, ButtonDirective, FormRoot, FormsModule, FormField, FormFeedbackComponent]
+  imports: [
+    ContainerComponent,
+    RowComponent,
+    ColComponent,
+    CardGroupComponent,
+    CardComponent,
+    CardBodyComponent,
+    FormDirective,
+    InputGroupComponent,
+    InputGroupTextDirective,
+    IconDirective,
+    FormControlDirective,
+    ButtonDirective,
+    FormRoot,
+    FormsModule,
+    FormField,
+    FormFeedbackComponent
+  ]
 })
 export class LoginComponent {
   loginModel = signal<AuthUser>({
@@ -33,11 +50,14 @@ export class LoginComponent {
     required(schemaPath.username, { message: 'Username is required' });
     required(schemaPath.password, { message: 'Password is required' });
 
+  },{
+    submission: {
+      action: async (form) => {
+        // Handle your API call or submission logic here
+        let formValue = form().value();
+        console.log('Submitting data...', formValue);
+      }
+    }
   });
-  onSubmit() {
-    let authUser = this.loginModel();
-    console.log('formData ', authUser);
 
-
-  }
 }

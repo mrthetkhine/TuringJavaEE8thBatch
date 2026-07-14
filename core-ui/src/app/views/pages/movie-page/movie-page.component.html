@@ -1,0 +1,167 @@
+<c-row ngPreserveWhitespaces>
+  <c-row ngPreserveWhitespaces>
+
+    <c-modal id="movieModal"
+             [visible]="visible"
+             (visibleChange)="handleLiveDemoChange($event)"
+             #modalLg size="lg">
+      <form cForm [formRoot]="movieForm">
+      <c-modal-header>
+        <h5 cModalTitle>New Movie</h5>
+        <button (click)="closeModal()" cButtonClose></button>
+      </c-modal-header>
+      <c-modal-body>
+
+          <c-row class="mb-3">
+            <label cLabel="col" cCol [sm]="2" for="title">
+              Title
+            </label>
+            <c-col [sm]="10">
+              <input cFormControl
+                     id="title" type="text"
+                     [class.is-invalid]="movieForm.title().touched() &&  movieForm.title().invalid()"
+                     [formField]="movieForm.title"/>
+              @if (movieForm.title().touched() &&  movieForm.title().invalid()) {
+                @for (error of movieForm.title().errors(); track error) {
+                  <c-form-feedback [valid]="false">
+                    {{error.message}}
+                  </c-form-feedback>
+                }
+              }
+            </c-col>
+          </c-row>
+          <c-row class="mb-3">
+            <label cLabel="col" cCol [sm]="2" for="year">
+              Year
+            </label>
+            <c-col [sm]="10">
+              <input cFormControl id="year" type="number"
+                     [class.is-invalid]="movieForm.year().touched() &&  movieForm.year().invalid()"
+                     [formField]="movieForm.year"
+                     />
+              @if (movieForm.year().touched() &&  movieForm.year().invalid()) {
+                @for (error of movieForm.year().errors(); track error) {
+                  <c-form-feedback [valid]="false">
+                    {{error.message}}
+                  </c-form-feedback>
+                }
+              }
+            </c-col>
+          </c-row>
+          <c-row class="mb-3">
+            <label cLabel="col" cCol [sm]="2" for="director">
+              Director
+            </label>
+            <c-col [sm]="10">
+              <input cFormControl id="director" type="text"
+                     [class.is-invalid]="movieForm.director().touched() &&  movieForm.director().invalid()"
+                     [formField]="movieForm.director"/>
+              @if (movieForm.director().touched() &&  movieForm.director().invalid()) {
+                @for (error of movieForm.director().errors(); track error) {
+                  <c-form-feedback [valid]="false">
+                    {{error.message}}
+                  </c-form-feedback>
+                }
+              }
+            </c-col>
+          </c-row>
+          <c-row class="mb-3">
+            <label cLabel="col" cCol [sm]="2" for="details">
+              Details
+            </label>
+            <c-col [sm]="10">
+              <input cFormControl id="details" type="text"
+                     [class.is-invalid]="movieForm.details.details().touched() &&  movieForm.details.details().invalid()"
+                     [formField]="movieForm.details.details"/>
+              @if (movieForm.details.details().touched() &&  movieForm.details.details().invalid()) {
+                @for (error of movieForm.details.details().errors(); track error) {
+                  <c-form-feedback [valid]="false">
+                    {{error.message}}
+                  </c-form-feedback>
+                }
+              }
+            </c-col>
+          </c-row>
+        @for (genre of movieForm.genres; track genre) {
+          <c-row class="mb-3">
+            <label cLabel="col" cCol [sm]="2" >
+              Genres
+            </label>
+            <c-col [sm]="5">
+              <input cFormControl  type="text"
+                     [formField]="movieForm.genres[$index]"
+                     [class.is-invalid]="movieForm.genres[$index]().touched() &&  movieForm.genres[$index]().invalid()"
+                     />
+              @if (movieForm.genres[$index]().touched() && movieForm.genres[$index]().invalid()) {
+                @for (error of movieForm.genres[$index]().errors(); track error) {
+                  <c-form-feedback [valid]="false">
+                    {{error.message}}
+                  </c-form-feedback>
+                }
+              }
+            </c-col>
+            <c-col [sm]="5">
+              <button cButton color="primary" type="button" (click)="removeGenre($index)">Remove</button>
+            </c-col>
+
+          </c-row>
+
+        }
+
+        <c-row class="mb-3">
+          <label cLabel="col" cCol [sm]="2" >
+
+          </label>
+          <c-col [sm]="5">
+            <button cButton color="primary" type="button" (click)="addGenre()">
+              Add New Genre
+            </button>
+          </c-col>
+
+        </c-row>
+
+      </c-modal-body>
+      <c-modal-footer>
+        <button (click)="closeModal()" cButton color="secondary">
+          Close
+        </button>
+        <button cButton color="primary" type="submit">Save</button>
+      </c-modal-footer>
+      </form>
+    </c-modal>
+    <c-col xs="12">
+      <button cButton color="primary" type="button" (click)="openNewMovieDialog()">New</button>
+    </c-col>
+    <c-col xs="12">
+      <table cTable>
+        <thead>
+        <tr>
+
+          <th scope="col">Title</th>
+          <th scope="col">Year</th>
+          <th scope="col">Director</th>
+          <th scope="col">Genres</th>
+          <th scope="col">Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>&#64;mdo</td>
+          <td>&#64;mdo</td>
+        </tr>
+        <tr>
+
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>&#64;mdo</td>
+          <td>&#64;mdo</td>
+        </tr>
+
+        </tbody>
+      </table>
+    </c-col>
+  </c-row>
+</c-row>

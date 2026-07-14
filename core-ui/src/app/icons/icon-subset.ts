@@ -66,7 +66,7 @@ import {
   cilMediaPlay,
   cilMediaRecord,
   cilMenu,
-  cilMoon,
+  cilMoon, cilMovie,
   cilNotes,
   cilOptions,
   cilPaperclip,
@@ -197,6 +197,7 @@ export const iconSubset = {
   cilUserFemale,
   cilUserFollow,
   cilUserUnfollow,
+  cilMovie,
   logo,
   signet
 };

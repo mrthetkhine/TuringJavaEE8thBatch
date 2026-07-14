@@ -11,6 +11,11 @@ export const navItems: INavData[] = [
     }
   },
   {
+    name: 'Movies',
+    url: '/movies',
+    iconComponent: { name: 'cil-movie' },
+  },
+  {
     title: true,
     name: 'Theme'
   },

@@ -18,6 +18,13 @@ export const routes: Routes = [
         loadChildren: () => import('./views/dashboard/routes').then((m) => m.routes)
       },
       {
+        path: 'movies',
+        loadComponent: () => import('./views/pages/movie-page/movie-page.component').then(m => m.MoviePageComponent),
+        data: {
+          title: 'Movies'
+        }
+      },
+      {
         path: 'theme',
         loadChildren: () => import('./views/theme/routes').then((m) => m.routes)
       },
@@ -55,6 +62,7 @@ export const routes: Routes = [
       }
     ]
   },
+
   {
     path: '404',
     loadComponent: () => import('./views/pages/page404/page404.component').then(m => m.Page404Component),
