@@ -1,17 +1,26 @@
 <c-row ngPreserveWhitespaces>
-  <c-row ngPreserveWhitespaces>
 
+
+  <c-row ngPreserveWhitespaces>
+    <app-confirm-dialog title="Delete Movie">
+      <h5>Are you sure you want to delete movie?</h5>
+    </app-confirm-dialog>
     <c-modal id="movieModal"
              [visible]="visible"
              (visibleChange)="handleLiveDemoChange($event)"
              #modalLg size="lg">
       <form cForm [formRoot]="movieForm">
       <c-modal-header>
-        <h5 cModalTitle>New Movie</h5>
-        <button (click)="closeModal()" cButtonClose></button>
+        <h5 cModalTitle>
+          {{editMode?'Edit Movie':'New Movie'}}
+        </h5>
+        <button (click)="closeModal()" cButtonClose type="button"></button>
       </c-modal-header>
       <c-modal-body>
-
+        <input cFormControl
+               id="id"
+               type="hidden"
+               [formField]="movieForm.id!"/>
           <c-row class="mb-3">
             <label cLabel="col" cCol [sm]="2" for="title">
               Title
@@ -125,7 +134,9 @@
         <button (click)="closeModal()" cButton color="secondary">
           Close
         </button>
-        <button cButton color="primary" type="submit">Save</button>
+        <button cButton color="primary" type="submit">
+          {{editMode?'Update':'Save'}}
+        </button>
       </c-modal-footer>
       </form>
     </c-modal>
@@ -142,23 +153,16 @@
           <th scope="col">Director</th>
           <th scope="col">Genres</th>
           <th scope="col">Details</th>
+          <th scope="col">Action</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>&#64;mdo</td>
-          <td>&#64;mdo</td>
-        </tr>
-        <tr>
-
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>&#64;mdo</td>
-          <td>&#64;mdo</td>
-        </tr>
+          @for (movie of movieService.movies();track movie.id){
+            <tr app-movie-ui [movie]="movie"
+                (onEdit)="onEditHandler($event)"
+                (onDelete)="onDeleteHandler($event)">
+            </tr>
+          }
 
         </tbody>
       </table>

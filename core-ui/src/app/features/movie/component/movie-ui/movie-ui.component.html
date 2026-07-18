@@ -1,0 +1,13 @@
+
+  <td >{{ movie().title }}</td>
+  <td >{{ movie().year }}</td>
+  <td >{{ movie().director }}</td>
+  <td >{{ movie().genres }}</td>
+  <td >{{ movie().details?.details }}</td>
+  <td>
+    <button cButton type="button" (click)="onEditClick()">Edit</button>
+    &nbsp;
+    <button cButton type="button" (click)="onDeleteClick()">Delete</button>
+    &nbsp;
+    <button cButton type="button" (click)="goToMovieDetails()">Details</button>
+  </td>

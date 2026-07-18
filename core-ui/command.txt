@@ -3,3 +3,6 @@ ng g i shared/models/ApiResponse --type=model
 ng g c views/pages/MoviePage
 ng g i shared/models/Movie --type=model
 ng g service features/movie/services/Movie
+ng g c features/movie/component/MovieUI
+ng g c shared/component/ConfirmDialog
+ng g c views/pages/MovieDetailsPage

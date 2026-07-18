@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal, viewChild } from '@angular/core';
 import {
   ButtonDirective,
   CardBodyComponent,
@@ -20,10 +20,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthUser } from '../../../shared/models/auth-user.model';
 import { Movie } from '../../../shared/models/movie.model';
 import { applyEach, form, FormField, FormRoot, minLength, required } from '@angular/forms/signals';
+import { MovieService } from '../../../features/movie/services/movie.service';
+import { MovieUIComponent } from '../../../features/movie/component/movie-ui/movie-ui.component';
+import { ConfirmDialogComponent } from '../../../shared/component/confirm-dialog/confirm-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie-page',
-  imports: [RowComponent, ColComponent, CardComponent, CardHeaderComponent, CardBodyComponent, DocsExampleComponent, ReactiveFormsModule, FormsModule, FormDirective, FormLabelDirective, FormControlDirective, ButtonDirective, RowDirective, GutterDirective, ColDirective, DocsComponentsComponent, TableDirective, ModalComponent, ModalHeaderComponent, ModalBodyComponent, ModalFooterComponent, ModalTitleDirective, FormRoot, FormField, FormFeedbackComponent],
+  imports: [RowComponent, ColComponent, CardComponent, CardHeaderComponent, CardBodyComponent, DocsExampleComponent, ReactiveFormsModule, FormsModule, FormDirective, FormLabelDirective, FormControlDirective, ButtonDirective, RowDirective, GutterDirective, ColDirective, DocsComponentsComponent, TableDirective, ModalComponent, ModalHeaderComponent, ModalBodyComponent, ModalFooterComponent, ModalTitleDirective, FormRoot, FormField, FormFeedbackComponent, MovieUIComponent, ConfirmDialogComponent],
   templateUrl: './movie-page.component.html',
   styleUrl: './movie-page.component.scss',
 })
@@ -31,7 +35,10 @@ export class MoviePageComponent {
   public favoriteColor = signal('#26ab3c');
   public visible = false;
 
+  movieService = inject(MovieService);
+  dlgDeleteConfirm = viewChild(ConfirmDialogComponent);
   movieModel = signal<Movie>({
+    id:'',
     title: '',
     year: 0,
     director: '',
@@ -55,16 +62,39 @@ export class MoviePageComponent {
     submission: {
       action: async (form) => {
         // Handle your API call or submission logic here
-        let formValue = form().value();
-        console.log('Submitting data', formValue);
+        let movie = form().value();
+        if(this.editMode)
+        {
+          this.editMovie(movie);
+        }
+        else
+        {
+          this.saveMovie(movie);
+        }
+
       }
     }
   });
-
+  editMode = false;
   handleLiveDemoChange(event: any) {
     this.visible = event;
   }
+
+  private emptyMovie:Movie = {
+    id:'',
+    title:'',
+    year:0,
+    director:'',
+    genres:[],
+    details: {
+      details:''
+    },
+  };
+
   openNewMovieDialog() {
+    this.editMode= false;
+    this.movieModel.set(this.emptyMovie);
+    this.movieForm().reset();
     this.openModal();
   }
   openModal()
@@ -90,5 +120,37 @@ export class MoviePageComponent {
       ...state,
       genres: [...state.genres, ''] // Appends an empty element
     }));
+  }
+  onEditHandler(movie: Movie): void {
+    console.log('onEdit ',movie);
+    this.editMode = true;
+    this.movieModel.set({
+      id:movie.id,
+      title:movie.title,
+      year:movie.year,
+      director:movie.director,
+      genres:movie.genres,
+      details:movie.details,
+    })
+    this.openModal();
+  }
+  onDeleteHandler(movie: Movie): void {
+    console.log('onDelete ',movie);
+    this.dlgDeleteConfirm()?.openConfirm(()=>{
+      console.log('Delete confirm ');
+      this.movieService.apiDeleteMovie(movie);
+    });
+  }
+  editMovie(movie:Movie)
+  {
+    console.log('Edit movie', movie);
+    this.movieService.apiUpdateMovie(movie);
+    this.closeModal();
+  }
+  saveMovie(movie:Movie)
+  {
+    console.log('Save movie', movie);
+    this.movieService.apiSaveMovie(movie);
+    this.closeModal();
   }
 }

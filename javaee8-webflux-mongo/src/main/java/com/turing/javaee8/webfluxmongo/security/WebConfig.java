@@ -50,7 +50,7 @@ public class WebConfig {
 							exchanges
 							.pathMatchers(HttpMethod.POST, "/api/login")
 							.permitAll()
-							/*
+							
 							.pathMatchers(HttpMethod.GET, "/api/actors/**")
 							.permitAll()
 							.pathMatchers(HttpMethod.POST, "/api/actors/**")
@@ -59,9 +59,9 @@ public class WebConfig {
 							.permitAll()	
 							.pathMatchers(HttpMethod.DELETE, "/api/actors/**")
 							.permitAll()	
-							*/	
-								/*
-								 * .pathMatchers(HttpMethod.GET, "/api/movies/**")
+							
+								
+								.pathMatchers(HttpMethod.GET, "/api/movies/**")
 								.permitAll()
 								 
 								.pathMatchers(HttpMethod.POST, "/api/movies/**")
@@ -70,7 +70,7 @@ public class WebConfig {
 								.permitAll()
 								.pathMatchers(HttpMethod.DELETE, "/api/movies/**")
 								.permitAll()
-								*/
+								
 								
 								.pathMatchers(HttpMethod.POST,"/api/register").hasRole("ADMIN")
 								.anyExchange().authenticated()

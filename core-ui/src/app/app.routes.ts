@@ -25,6 +25,13 @@ export const routes: Routes = [
         }
       },
       {
+        path: 'movies/:id',
+        loadComponent: () => import('./views/pages/movie-details-page/movie-details-page.component').then(m => m.MovieDetailsPageComponent),
+        data: {
+          title: 'Movies Details'
+        }
+      },
+      {
         path: 'theme',
         loadChildren: () => import('./views/theme/routes').then((m) => m.routes)
       },

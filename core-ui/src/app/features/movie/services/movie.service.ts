@@ -19,13 +19,12 @@ export class MovieService {
   public movies = computed(() => this.state().movies);
 
   constructor() {
-    this.loadAllMovies();
+    this.apiLoadAllMovies();
   }
 
-  loadAllMovies() {
+  apiLoadAllMovies() {
     this.http.get<ApiResponse<Movie[]>>(BASE_URL+'/movies')
       .subscribe(response => {
-        //console.log('load all actors ', response);
         this.initMovies(response.data);
       });
   }
@@ -33,6 +32,50 @@ export class MovieService {
     this.state.update((currentState) => ({
       loading:false,
       movies: movies
+    }));
+  }
+  getMovieById(id: string) {
+    return this.movies().find(x => x.id === id);
+  }
+  apiSaveMovie(movie: Movie) {
+    delete movie.id;
+    this.http.post<ApiResponse<Movie>>(BASE_URL+'/movies', JSON.stringify(movie),
+      {headers: { 'Content-Type': 'application/json' }})
+      .subscribe(response => {
+        this.addMovie(response.data);
+      });
+  }
+  addMovie(movie: Movie) {
+    this.state.update((currentState) => ({
+      ...currentState,
+      movies: [...currentState.movies,movie]
+    }));
+  }
+
+  apiDeleteMovie(movie: Movie) {
+    this.http.delete<ApiResponse<Movie>>(BASE_URL+`/movies/${movie.id}`)
+      .subscribe(response => {
+        this.deleteMovie(response.data);
+      });
+  }
+  deleteMovie(movie: Movie) {
+    this.state.update((currentState) => ({
+      ...currentState,
+      movies: currentState.movies.filter(m => movie.id !== m.id)
+    }));
+  }
+  apiUpdateMovie(movie: Movie) {
+
+    this.http.put<ApiResponse<Movie>>(BASE_URL+`/movies/${movie.id}`, JSON.stringify(movie),
+      {headers: { 'Content-Type': 'application/json' }})
+      .subscribe(response => {
+        this.updateMovie(response.data);
+      });
+  }
+  updateMovie(movie: Movie) {
+    this.state.update((currentState) => ({
+      ...currentState,
+      movies: currentState.movies.map(m=>m.id==movie.id?movie:m)
     }));
   }
 }
