@@ -32,6 +32,13 @@ export const routes: Routes = [
         }
       },
       {
+        path: 'actors',
+        loadComponent: () => import('./views/pages/actors-page/actors-page.component').then(m => m.ActorsPageComponent),
+        data: {
+          title: 'Actors'
+        }
+      },
+      {
         path: 'theme',
         loadChildren: () => import('./views/theme/routes').then((m) => m.routes)
       },

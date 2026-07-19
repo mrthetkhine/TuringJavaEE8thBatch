@@ -2,7 +2,8 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Movie } from '../../../shared/models/movie.model';
 import { ApiResponse } from '../../../shared/models/api-response.model';
-const BASE_URL = 'http://localhost:8080/api';
+import {BASE_URL} from '../../../shared/util/Config';
+
 export interface MovieState {
   movies: Movie[];
   loading: boolean;
@@ -35,7 +36,7 @@ export class MovieService {
     }));
   }
   getMovieById(id: string) {
-    return this.movies().find(x => x.id === id);
+    return this.http.get<ApiResponse<Movie>>(BASE_URL+`/movies/${id}`);
   }
   apiSaveMovie(movie: Movie) {
     delete movie.id;
@@ -77,5 +78,10 @@ export class MovieService {
       ...currentState,
       movies: currentState.movies.map(m=>m.id==movie.id?movie:m)
     }));
+  }
+  apiAssignActorToMovie(movieId:string,actorId:string) {
+    return this.http.post<ApiResponse<Movie>>(BASE_URL+`/movies/${movieId}/assignment/actors/${actorId}`, JSON.stringify({}),
+      {headers: { 'Content-Type': 'application/json' }});
+
   }
 }

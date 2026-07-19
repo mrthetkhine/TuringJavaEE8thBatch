@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Movie } from '../../../models/movie.model';
 
 @Component({
   selector: 'app-movies-details',
@@ -9,10 +10,12 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 })
 export class MoviesDetails {
   private activatedRoute = inject(ActivatedRoute);
-  movieId?: string;
 
+  movieId?: string;
+  movie?:Movie;
   constructor() {
     this.movieId = this.activatedRoute.snapshot.paramMap.get('id') ?? '';
     console.log('Movie Details Page', this.movieId);
   }
+
 }

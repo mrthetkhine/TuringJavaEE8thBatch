@@ -6,3 +6,7 @@ ng g service features/movie/services/Movie
 ng g c features/movie/component/MovieUI
 ng g c shared/component/ConfirmDialog
 ng g c views/pages/MovieDetailsPage
+ng g c shared/component/ActorUI
+ng g c views/pages/ActorsPage
+ng g service features/actor/services/Actor
+ng g i shared/models/AssignedActor --type=model

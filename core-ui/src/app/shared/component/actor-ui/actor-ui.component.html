@@ -1,0 +1,42 @@
+<c-row ngPreserveWhitespaces>
+  <c-card>
+    <c-row>
+      <h5 cCardTitle>Actor</h5>
+    </c-row>
+    <c-card-body>
+      <c-row class="mb-3">
+        <label cLabel="col" cCol [sm]="2" for="firstName">
+          First Name
+        </label>
+        <c-col [sm]="10">
+          <input cFormControl
+                 [value]="actor()?.firstName"
+                 readonly/>
+
+        </c-col>
+      </c-row>
+      <c-row class="mb-3">
+        <label cLabel="col" cCol [sm]="2" for="lastName">
+          Last Name
+        </label>
+        <c-col [sm]="10">
+          <input cFormControl
+                 [value]="actor()?.lastName"
+                 readonly/>
+
+        </c-col>
+      </c-row>
+      <c-row class="mb-3">
+        <label cLabel="col" cCol [sm]="2" for="gender">
+          Gender
+        </label>
+        <c-col [sm]="10">
+          <input cFormControl
+                 [value]="actor()?.gender"
+                 readonly/>
+
+        </c-col>
+      </c-row>
+    </c-card-body>
+  </c-card>
+</c-row>
