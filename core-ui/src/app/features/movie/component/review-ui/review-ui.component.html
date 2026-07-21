@@ -1,0 +1,36 @@
+<c-card class="card-container">
+  <c-card-body>
+    <c-row>
+      <h5 cCardTitle>{{review().review}}</h5>
+    </c-row>
+    <c-row class="mb-3">
+
+      <c-col [sm]="4">
+        <ngx-stars [readonly]="false"
+                   [size]="2"
+                   [maxStars]="5"
+                   [readonly]="true"
+                   [color]="'dodgerblue'"
+                   [initialStars]="review().rating"
+                   (ratingOutput)="onRatingSet($event)"></ngx-stars>
+
+      </c-col>
+
+    </c-row>
+    <c-row>
+      <c-col [sm]="4">
+        <button cButton color="primary"
+                type="button"
+                (click)="editHandler()">
+          Edit
+        </button>
+        &nbsp;
+        <button cButton color="primary"
+                type="button"
+                (click)="deleteHandler()">
+          Delete
+        </button>
+      </c-col>
+    </c-row>
+  </c-card-body>
+</c-card>

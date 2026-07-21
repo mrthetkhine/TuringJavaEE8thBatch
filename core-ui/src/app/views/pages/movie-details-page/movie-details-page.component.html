@@ -117,4 +117,99 @@
     </table>
   </c-row>
 </c-row>
+<c-modal id="actorModal"
+         [visible]="visible"
+         (visibleChange)="handleLiveDemoChange($event)"
+         #modalLg size="lg">
+  <form cForm [formRoot]="reviewForm">
+    <c-modal-header>
+      <h5 cModalTitle>
+        {{editMode?'Edit Review':'New Review'}}
+      </h5>
+      <button (click)="closeModal()" cButtonClose type="button"></button>
+    </c-modal-header>
+    <c-modal-body>
+      <input cFormControl
+             id="id"
+             type="hidden"
+             [formField]="reviewForm.id!"/>
+      <c-row class="mb-3">
+        <label cLabel="col" cCol [sm]="2" for="title">
+          Review
+        </label>
+        <c-col [sm]="10">
+          <input cFormControl
+                 id="firstName"
+                 type="text"
+                 [class.is-invalid]="reviewForm.review().touched() &&  reviewForm.review().invalid()"
+                 [formField]="reviewForm.review"/>
+          @if (reviewForm.review().touched() &&  reviewForm.review().invalid()) {
+            @for (error of reviewForm.review().errors(); track error) {
+              <c-form-feedback [valid]="false">
+                {{error.message}}
+              </c-form-feedback>
+            }
+          }
+        </c-col>
+      </c-row>
+      <c-row class="mb-3">
+        <label cLabel="col" cCol [sm]="2" for="title">
+          Rating
+        </label>
+        <c-col [sm]="10">
+          <ngx-stars [readonly]="false"
+                     [size]="2"
+                     [maxStars]="5"
+                     [initialStars]="rating"
+                     [color]="'dodgerblue'"
+                     (ratingOutput)="onRatingSet($event)"
+
+          ></ngx-stars>
+
+            @if (changeRating && reviewForm.rating().invalid()) {
+              @for (error of reviewForm.rating().errors(); track error) {
+                <div class="alert alert-danger">
+                  {{error.message}}
+                </div>
+              }
+            }
+
+
+        </c-col>
+      </c-row>
+
+
+
+
+
+    </c-modal-body>
+    <c-modal-footer>
+      <button (click)="closeModal()" cButton color="secondary">
+        Close
+      </button>
+      <button cButton color="primary" type="submit">
+        {{editMode?'Update':'Save'}}
+      </button>
+    </c-modal-footer>
+  </form>
+</c-modal>
+<c-row ngPreserveWhitespaces>
+  <c-row>
+    <c-col [sm]="4">
+      <button cButton color="primary"
+              type="button"
+              (click)="showNewReviewDialog()">
+        New
+      </button>
+      &nbsp;
+    </c-col>
+  </c-row>
+  <c-row ngPreserveWhitespaces>
+    @for(review of reviewService.reviews();track review.id){
+      <app-review-ui [review]="review"
+                    (onEdit)="onEditHandler($event)"
+                    (onDelete)="onDeleteHandler($event)"/>
+    }
+  </c-row>
+</c-row>
 
