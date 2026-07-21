@@ -58,7 +58,7 @@ export class ReviewService {
   updateReview(review: Review) {
     this.state.update((currentState) => ({
       ...currentState,
-      movies: currentState.reviews.map(r=>r.id==review.id?review:r)
+      reviews: currentState.reviews.map(r=>r.id==review.id?review:r)
     }));
   }
 }

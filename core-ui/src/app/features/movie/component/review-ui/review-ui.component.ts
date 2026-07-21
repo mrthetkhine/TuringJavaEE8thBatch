@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, output, SimpleChanges, ViewChild } from '@angular/core';
 import { Review } from '../../../../shared/models/review.model';
 import {
   ButtonDirective,
@@ -11,7 +11,7 @@ import {
 } from '@coreui/angular';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgxStarsModule } from 'ngx-stars';
+import { NgxStarsComponent, NgxStarsModule } from 'ngx-stars';
 
 @Component({
   selector: 'app-review-ui',
@@ -31,7 +31,8 @@ export class ReviewUIComponent {
 
   onEdit = output<Review>();
   onDelete = output<Review>();
-
+  @ViewChild(NgxStarsComponent)
+  starsComponent?: NgxStarsComponent;
   onRatingSet(rating: number){
     console.log('rating set ',rating);
   }
@@ -42,5 +43,9 @@ export class ReviewUIComponent {
   deleteHandler()
   {
     this.onDelete.emit(this.review());
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('Review changes ',changes, ' reivew ',this.review());
+    this.starsComponent?.setRating(this.review().rating);
   }
 }
