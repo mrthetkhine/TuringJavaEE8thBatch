@@ -13,3 +13,8 @@ ng g i shared/models/AssignedActor --type=model
 ng g service features/movie/services/Review
 ng g i shared/models/Review --type=model
 ng g c features/movie/component/RatingUI
+ng generate guard guards/Auth
+ng g service shared/services/Auth
+ng g i shared/models/AuthUser --type=model
+ng g c shared/component/MessageDialog
+ng g interceptor token

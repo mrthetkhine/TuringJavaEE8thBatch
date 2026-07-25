@@ -49,4 +49,8 @@ function isOverflown(element: HTMLElement) {
 })
 export class DefaultLayoutComponent {
   public navItems = [...navItems];
+
+  ngOnInit() {
+    console.log('Home DefaultLayoutComponent');
+  }
 }

@@ -61,4 +61,18 @@ export class ReviewService {
       reviews: currentState.reviews.map(r=>r.id==review.id?review:r)
     }));
   }
+  apiDeleteReview(review: Review) {
+
+    this.http.delete<ApiResponse<Review>>(BASE_URL+`/movies/reviews/${review.id}`,
+      {headers: { 'Content-Type': 'application/json' }})
+      .subscribe(response => {
+        this.deleteReview(response.data);
+      });
+  }
+  deleteReview(review: Review) {
+    this.state.update((currentState) => ({
+      ...currentState,
+      reviews: currentState.reviews.filter(r=>r.id!=review.id)
+    }));
+  }
 }

@@ -7,6 +7,7 @@ import { delay, filter, map, tap } from 'rxjs/operators';
 import { ColorModeService } from '@coreui/angular';
 import { IconSetService } from '@coreui/icons-angular';
 import { iconSubset } from './icons/icon-subset';
+import { AuthService } from './shared/services/auth.service';
 
 @Component({
     selector: 'app-root',
@@ -14,6 +15,7 @@ import { iconSubset } from './icons/icon-subset';
     imports: [RouterOutlet]
 })
 export class AppComponent implements OnInit {
+  authService = inject(AuthService);
   title = 'CoreUI Angular Admin Template';
 
   readonly #destroyRef: DestroyRef = inject(DestroyRef);
@@ -30,6 +32,7 @@ export class AppComponent implements OnInit {
     this.#iconSetService.icons = { ...iconSubset };
     this.#colorModeService.localStorageItemName.set('coreui-free-angular-admin-template-theme-default');
     this.#colorModeService.eventName.set('ColorSchemeChange');
+    console.log('App Component Created');
   }
 
   ngOnInit(): void {
@@ -53,5 +56,7 @@ export class AppComponent implements OnInit {
         takeUntilDestroyed(this.#destroyRef)
       )
       .subscribe();
+
   }
+
 }

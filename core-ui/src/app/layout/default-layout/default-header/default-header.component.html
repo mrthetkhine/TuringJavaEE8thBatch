@@ -74,7 +74,7 @@
           Account
         </h6>
       </li>
-      <li>
+      <!--<li>
         <a cDropdownItem routerLink="">
           <svg cIcon class="me-2" name="cilBell"></svg>
           Updates
@@ -102,6 +102,12 @@
           <svg cIcon class="me-2" name="cilCommentSquare"></svg>
           Comments
           <c-badge class="ms-auto" color="warning"> 42</c-badge>
+        </a>
+      </li>-->
+      <!--<li>
+        <a cDropdownItem >
+          <svg cIcon class="me-2" name="cilUser"></svg>
+          Logout
         </a>
       </li>
       <li>
@@ -148,9 +154,9 @@
           <svg cIcon class="me-2" name="cilLockLocked"></svg>
           Lock Account
         </a>
-      </li>
+      </li>-->
       <li>
-        <a cDropdownItem routerLink="">
+        <a cDropdownItem (click)="logout()">
           <svg cIcon class="me-2" name="cilAccountLogout"></svg>
           Logout
         </a>

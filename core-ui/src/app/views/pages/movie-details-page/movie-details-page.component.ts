@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, inject, signal, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, signal, viewChild, ViewChild } from '@angular/core';
 import {
   ButtonDirective,
   CardBodyComponent,
@@ -32,6 +32,7 @@ import { ReviewUIComponent } from '../../../features/movie/component/review-ui/r
 import { Review } from '../../../shared/models/review.model';
 import { Actor } from '../../../shared/models/actor.model';
 import { NgxStarsComponent, NgxStarsModule } from 'ngx-stars';
+import { ConfirmDialogComponent } from '../../../shared/component/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-movie-details-page',
@@ -61,7 +62,8 @@ import { NgxStarsComponent, NgxStarsModule } from 'ngx-stars';
     ModalFooterComponent,
     ModalHeaderComponent,
     ModalTitleDirective,
-    NgxStarsModule
+    NgxStarsModule,
+    ConfirmDialogComponent
   ],
   templateUrl: './movie-details-page.component.html',
   styleUrl: './movie-details-page.component.scss',
@@ -73,6 +75,8 @@ export class MovieDetailsPageComponent {
   movieService = inject(MovieService);
   actorService = inject(ActorService);
   reviewService = inject(ReviewService);
+
+  dlgDeleteConfirm = viewChild(ConfirmDialogComponent);
 
   movieId?: string;
   movie?:Movie;
@@ -207,7 +211,11 @@ export class MovieDetailsPageComponent {
   }
   onDeleteHandler(review:Review)
   {
-    console.log('edit review ',review);
+    console.log('Delete review ',review);
+    this.dlgDeleteConfirm()?.openConfirm(()=>{
+      console.log('Delete confirm ');
+      this.reviewService.apiDeleteReview(review);
+    });
   }
   editReview(review:Review)
   {

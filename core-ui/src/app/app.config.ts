@@ -10,6 +10,8 @@ import {
 } from '@angular/router';
 import { IconSetService } from '@coreui/icons-angular';
 import { routes } from './app.routes';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { tokenInterceptor } from './token.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -26,7 +28,10 @@ export const appConfig: ApplicationConfig = {
       withHashLocation()
     ),
     IconSetService,
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideHttpClient(
+      withInterceptors([tokenInterceptor])
+    ),
   ]
 };
 

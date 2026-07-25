@@ -204,6 +204,9 @@
       &nbsp;
     </c-col>
   </c-row>
+  <app-confirm-dialog title="Delete Review">
+    <h5>Are you sure you want to delete review?</h5>
+  </app-confirm-dialog>
   <c-row ngPreserveWhitespaces>
     @for(review of reviewService.reviews();track review.id){
       <app-review-ui [review]="review"

@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -15,28 +16,32 @@ export const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        loadChildren: () => import('./views/dashboard/routes').then((m) => m.routes)
+        loadChildren: () => import('./views/dashboard/routes').then((m) => m.routes),
+        canActivate: [authGuard],
       },
       {
         path: 'movies',
         loadComponent: () => import('./views/pages/movie-page/movie-page.component').then(m => m.MoviePageComponent),
         data: {
           title: 'Movies'
-        }
+        },
+        canActivate: [authGuard],
       },
       {
         path: 'movies/:id',
         loadComponent: () => import('./views/pages/movie-details-page/movie-details-page.component').then(m => m.MovieDetailsPageComponent),
         data: {
           title: 'Movies Details'
-        }
+        },
+        canActivate: [authGuard],
       },
       {
         path: 'actors',
         loadComponent: () => import('./views/pages/actors-page/actors-page.component').then(m => m.ActorsPageComponent),
         data: {
           title: 'Actors'
-        }
+        },
+        canActivate: [authGuard],
       },
       {
         path: 'theme',

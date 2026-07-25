@@ -1,0 +1,16 @@
+<c-modal
+  [transition]="false"
+  [visible]="visible"
+
+>
+  <c-modal-header>
+    <h5 cModalTitle>{{title()}}</h5>
+    <button cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <ng-content/>
+  </c-modal-body>
+  <c-modal-footer>
+    <button cButton color="secondary" type="button" (click)="close()" >Close</button>
+  </c-modal-footer>
+</c-modal>

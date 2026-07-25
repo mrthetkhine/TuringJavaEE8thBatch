@@ -1,6 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 import {
   AvatarComponent,
@@ -23,6 +23,7 @@ import {
 } from '@coreui/angular';
 
 import { IconDirective } from '@coreui/icons-angular';
+import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-default-header',
@@ -30,6 +31,9 @@ import { IconDirective } from '@coreui/icons-angular';
   imports: [ContainerComponent, HeaderTogglerDirective, SidebarToggleDirective, IconDirective, HeaderNavComponent, NavItemComponent, NavLinkDirective, RouterLink, RouterLinkActive, NgTemplateOutlet, BreadcrumbRouterComponent, DropdownComponent, DropdownToggleDirective, AvatarComponent, DropdownMenuDirective, DropdownHeaderDirective, DropdownItemDirective, BadgeComponent, DropdownDividerDirective]
 })
 export class DefaultHeaderComponent extends HeaderComponent {
+
+  authService = inject(AuthService);
+  router = inject(Router);
 
   readonly #colorModeService = inject(ColorModeService);
   readonly colorMode = this.#colorModeService.colorMode;
@@ -126,4 +130,11 @@ export class DefaultHeaderComponent extends HeaderComponent {
     { id: 4, title: 'Angular Version', value: 100, color: 'success' }
   ];
 
+  logout()
+  {
+    console.log('logout');
+    this.authService.logout();
+    this.router.navigate(['/login']);
+    console.log('navigatino done');
+  }
 }
